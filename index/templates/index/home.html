@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,8 +13,8 @@
     <meta content="dataidea data idea uganda" name="keywords" />
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon" />
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+    <link href="{% static 'img/favicon.png' %}" rel="icon" />
+    <link href="{% static 'img/apple-touch-icon.png' %}" rel="apple-touch-icon" />
 
     <!-- Google Fonts -->
     <link
@@ -22,33 +23,39 @@
     />
 
     <!-- Vendor CSS Files -->
-    <link href="assets/vendor/aos/aos.css" rel="stylesheet" />
+    <link href="{% static 'vendor/aos/aos.css' %}" rel="stylesheet" />
     <link
-      href="assets/vendor/bootstrap/css/bootstrap.min.css"
+      href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}"
       rel="stylesheet"
     />
     <link
-      href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}"
       rel="stylesheet"
     />
-    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
     <link
-      href="assets/vendor/glightbox/css/glightbox.min.css"
+      href="{% static 'vendor/boxicons/css/boxicons.min.css' %}"
       rel="stylesheet"
     />
-    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+    <link
+      href="{% static 'vendor/glightbox/css/glightbox.min.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'vendor/swiper/swiper-bundle.min.css' %}"
+      rel="stylesheet"
+    />
 
     <!-- Template Main CSS File -->
-    <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
   </head>
 
   <body>
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top">
       <div class="container d-flex align-items-center justify-content-between">
-        <h1 class="logo"><a href="index.html">DataIdea</a></h1>
+        <h1 class="logo"><a href="{% url 'index:home' %}">DataIdea</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+        <!-- <a href="index.html" class="logo"><img src="{% static 'img/logo.png" alt="" class="img-fluid"></a>-->
 
         <nav id="navbar" class="navbar">
           <ul>
@@ -58,7 +65,7 @@
             <li>
               <a class="nav-link scrollto" href="#portfolio">Portfolio</a>
             </li>
-            <!-- <li><a class="nav-link scrollto" href="#team">Team</a></li> -->
+            <li><a class="nav-link scrollto" href="">School</a></li>
             <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
@@ -110,7 +117,7 @@
             data-aos-delay="150"
           >
             <img
-              src="assets/img/hero-img.png"
+              src="{% static 'img/hero-img.png' %}"
               class="img-fluid animated"
               alt=""
             />
@@ -130,7 +137,7 @@
               data-aos="zoom-in"
               data-aos-delay="150"
             >
-              <img src="assets/img/about.jpg" class="img-fluid" alt="" />
+              <img src="{% static 'img/about.jpg' %}" class="img-fluid" alt="" />
             </div>
             <div
               class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content"
@@ -500,7 +507,7 @@
               data-aos="zoom-in"
               data-aos-delay="100"
             >
-              <img src="assets/img/features.svg" alt="" class="img-fluid" />
+              <img src="{% static 'img/features.svg' %}" alt="" class="img-fluid" />
             </div>
           </div>
         </div>
@@ -538,7 +545,7 @@
                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                   </p>
                   <img
-                    src="assets/img/testimonials/"
+                    src="{% static 'img/testimonials/' %}"
                     class="testimonial-img"
                     alt=""
                   />
@@ -561,7 +568,7 @@
                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                   </p>
                   <img
-                    src="assets/img/testimonials/"
+                    src="{% static 'img/testimonials/' %}"
                     class="testimonial-img"
                     alt=""
                   />
@@ -584,7 +591,7 @@
                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                   </p>
                   <img
-                    src="assets/img/testimonials/"
+                    src="{% static 'img/testimonials/' %}"
                     class="testimonial-img"
                     alt=""
                   />
@@ -601,7 +608,7 @@
                   Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore.
                   <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                 </p>
-                <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
+                <img src="{% static 'img/testimonials/testimonials-4.jpg' %}" class="testimonial-img" alt="">
                 <h3>Matt Brandon</h3>
                 <h4>Freelancer</h4>
               </div>
@@ -614,7 +621,7 @@
                   Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa.
                   <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                 </p>
-                <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
+                <img src="{% static 'img/testimonials/testimonials-5.jpg' %}" class="testimonial-img" alt="">
                 <h3>John Larson</h3>
                 <h4>Entrepreneur</h4>
               </div>
@@ -656,13 +663,13 @@
           <div class="row portfolio-container">
             <!-- <div class="col-lg-4 col-md-6 portfolio-item filter-app">
             <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
+              <img src="{% static 'img/portfolio/portfolio-1.jpg' %}" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>App 1</h4>
                 <p>App</p>
               </div>
               <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
+                <a href="{% static 'img/portfolio/portfolio-1.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
                 <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
               </div>
             </div>
@@ -676,7 +683,7 @@
               >
                 <div class="portfolio-wrap">
                   <img
-                    src="assets/img/portfolio/panobooking.jpg"
+                    src="{% static 'img/portfolio/panobooking.jpg' %}"
                     class="img-fluid"
                     alt=""
                   />
@@ -686,7 +693,7 @@
                   </div>
                   <div class="portfolio-links">
                     <a
-                      href="assets/img/portfolio/panobooking.jpg"
+                      href="{% static 'img/portfolio/panobooking.jpg' %}"
                       data-gallery="portfolioGallery"
                       class="portfolio-lightbox"
                       title="Web 3"
@@ -699,13 +706,13 @@
 
             <!-- <div class="col-lg-4 col-md-6 portfolio-item filter-app">
             <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-3.jpg" class="img-fluid" alt="">
+              <img src="{% static 'img/portfolio/portfolio-3.jpg' %}" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>App 2</h4>
                 <p>App</p>
               </div>
               <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 2"><i class="bx bx-plus"></i></a>
+                <a href="{% static 'img/portfolio/portfolio-3.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 2"><i class="bx bx-plus"></i></a>
                 <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
               </div>
             </div>
@@ -719,7 +726,7 @@
               >
                 <div class="portfolio-wrap">
                   <img
-                    src="assets/img/portfolio/colab.jfif"
+                    src="{% static 'img/portfolio/colab.jfif' %}"
                     class="img-fluid"
                     alt=""
                   />
@@ -729,7 +736,7 @@
                   </div>
                   <div class="portfolio-links">
                     <a
-                      href="assets/img/portfolio/colab.jfif"
+                      href="{% static 'img/portfolio/colab.jfif' %}"
                       data-gallery="portfolioGallery"
                       class="portfolio-lightbox"
                       title="Card 2"
@@ -748,7 +755,7 @@
               >
                 <div class="portfolio-wrap">
                   <img
-                    src="assets/img/portfolio/python.jpg"
+                    src="{% static 'img/portfolio/python.jpg' %}"
                     class="img-fluid"
                     alt=""
                   />
@@ -758,7 +765,7 @@
                   </div>
                   <div class="portfolio-links">
                     <a
-                      href="assets/img/portfolio/python.jpg"
+                      href="{% static 'img/portfolio/python.jpg' %}"
                       data-gallery="portfolioGallery"
                       class="portfolio-lightbox"
                       title="Card 2"
@@ -777,7 +784,7 @@
               >
                 <div class="portfolio-wrap">
                   <img
-                    src="assets/img/portfolio/jumashafara.JFIF"
+                    src="{% static 'img/portfolio/jumashafara.JFIF' %}"
                     class="img-fluid"
                     alt=""
                   />
@@ -787,7 +794,7 @@
                   </div>
                   <div class="portfolio-links">
                     <a
-                      href="assets/img/portfolio/jumashafara.JPG"
+                      href="{% static 'img/portfolio/jumashafara.JPG' %}"
                       data-gallery="portfolioGallery"
                       class="portfolio-lightbox"
                       title="Web 2"
@@ -800,13 +807,13 @@
 
             <!-- <div class="col-lg-4 col-md-6 portfolio-item filter-app">
             <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-6.jpg" class="img-fluid" alt="">
+              <img src="{% static 'img/portfolio/portfolio-6.jpg' %}" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>App 3</h4>
                 <p>App</p>
               </div>
               <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-6.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 3"><i class="bx bx-plus"></i></a>
+                <a href="{% static 'img/portfolio/portfolio-6.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 3"><i class="bx bx-plus"></i></a>
                 <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
               </div>
             </div>
@@ -820,7 +827,7 @@
               >
                 <div class="portfolio-wrap">
                   <img
-                    src="assets/img/portfolio/pytorch.jpg"
+                    src="{% static 'img/portfolio/pytorch.jpg' %}"
                     class="img-fluid"
                     alt=""
                   />
@@ -830,7 +837,7 @@
                   </div>
                   <div class="portfolio-links">
                     <a
-                      href="assets/img/portfolio/pytorch.jpg"
+                      href="{% static 'img/portfolio/pytorch.jpg' %}"
                       data-gallery="portfolioGallery"
                       class="portfolio-lightbox"
                       title="Card 3"
@@ -849,7 +856,7 @@
               >
                 <div class="portfolio-wrap">
                   <img
-                    src="assets/img/portfolio/fastai2.png"
+                    src="{% static 'img/portfolio/fastai2.png' %}"
                     class="img-fluid"
                     alt=""
                   />
@@ -859,7 +866,7 @@
                   </div>
                   <div class="portfolio-links">
                     <a
-                      href="assets/img/portfolio/fastai2.png"
+                      href="{% static 'img/portfolio/fastai2.png' %}"
                       data-gallery="portfolioGallery"
                       class="portfolio-lightbox"
                       title="Card 3"
@@ -878,7 +885,7 @@
               >
                 <div class="portfolio-wrap">
                   <img
-                    src="assets/img/portfolio/c_language.png"
+                    src="{% static 'img/portfolio/c_language.png' %}"
                     class="img-fluid"
                     alt=""
                   />
@@ -888,7 +895,7 @@
                   </div>
                   <div class="portfolio-links">
                     <a
-                      href="assets/img/portfolio/c_language.png"
+                      href="{% static 'img/portfolio/c_language.png' %}"
                       data-gallery="portfolioGallery"
                       class="portfolio-lightbox"
                       title="Card 1"
@@ -902,7 +909,7 @@
             <div class="col-lg-4 col-md-6 portfolio-item filter-web">
               <div class="portfolio-wrap">
                 <img
-                  src="assets/img/portfolio/learningtool.jfif"
+                  src="{% static 'img/portfolio/learningtool.jfif' %}"
                   class="img-fluid"
                   alt=""
                 />
@@ -912,7 +919,7 @@
                 </div>
                 <div class="portfolio-links">
                   <a
-                    href="assets/img/portfolio/learningtool.jfif"
+                    href="{% static 'img/portfolio/learningtool.jfif' %}"
                     data-gallery="portfolioGallery"
                     class="portfolio-lightbox"
                     title="Web 3"
@@ -1251,12 +1258,7 @@
             </div>
 
             <div class="col-lg-6">
-              <form
-                action="forms/contact.php"
-                method="post"
-                role="form"
-                class="php-email-form"
-              >
+              <form action="" method="post" role="form" class="php-email-form">
                 <div class="row">
                   <div class="col-md-6 form-group">
                     <input
@@ -1442,16 +1444,16 @@
     <div id="preloader"></div>
 
     <!-- Vendor JS Files -->
-    <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-    <script src="assets/vendor/aos/aos.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="{% static 'vendor/purecounter/purecounter_vanilla.js' %}"></script>
+    <script src="{% static 'vendor/aos/aos.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'vendor/glightbox/js/glightbox.min.js' %}"></script>
+    <script src="{% static 'vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'vendor/php-email-form/validate.js' %}"></script>
 
     <!-- Template Main JS File -->
-    <script src="assets/js/main.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
 
     <!--Start of Tawk.to Script-->
     <script type="text/javascript">
