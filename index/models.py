@@ -2,10 +2,9 @@ from django.db import models
 
 # Create your models here.
 class Service(models.Model):
-    SERVICE_IMAGES = []
     name = models.CharField(max_length=122)
-    image = models.CharField(max_length=1, choices=SERVICE_IMAGES)
-    description = models.TextField()
+    image = models.ImageField(upload_to='services', default='services/service.html')
+    description = models.TextField(default="One of our services")
 
     def __str__(self):
         return self.name
@@ -30,11 +29,14 @@ class Testimonial(models.Model):
 
 
 class Portfolio(models.Model):
-    CATEGORIES = [('web', 'Web'), ('app', 'App'), ('tutorial', 'Tutorial')]      
+    CATEGORIES = [('web', 'Web'), ('other', 'Other'), ('tutorial', 'Tutorial')]      
     name = models.CharField(max_length=122)
     image = models.ImageField(upload_to='portfolio')
     category = models.CharField(max_length=8, choices=CATEGORIES)
-    description = models.TextField()
+    client = models.CharField(max_length=50, default='Private')
+    url = models.CharField(max_length=100, default='No url')
+    date = models.DateField(null=True)
+    description = models.TextField(default='No description')
 
     def __str__(self):
         return self.name
@@ -49,7 +51,7 @@ class Price(models.Model):
         return self.name
 
 
-class FAQ(models.Model):
+class FrequentlyAskedQuestion(models.Model):
     question = models.CharField(max_length=122)
     answer = models.TextField()
 
