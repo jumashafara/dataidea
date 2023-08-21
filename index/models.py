@@ -2,17 +2,17 @@ from django.db import models
 
 # Create your models here.
 class Service(models.Model):
+    icon = models.CharField(max_length=122, default='layer')
+    color = models.CharField(max_length=22, default='#f5f5f5')
     name = models.CharField(max_length=122)
-    image = models.ImageField(upload_to='services', default='services/service.html')
     description = models.TextField(default="One of our services")
 
     def __str__(self):
         return self.name
 
 class Feature(models.Model):
-    FEATURE_IMAGES = []
+    icon = models.CharField(max_length=122, default='layer' )
     name = models.CharField(max_length=122)
-    image = models.CharField(max_length=1, choices=FEATURE_IMAGES)
     description = models.TextField()
 
     def __str__(self):
@@ -21,6 +21,7 @@ class Feature(models.Model):
 
 class Testimonial(models.Model):
     name = models.CharField(max_length=122)
+    image = models.ImageField(upload_to='testimonials')
     position = models.CharField(max_length=122)
     testimony = models.TextField()
 
@@ -59,12 +60,31 @@ class FrequentlyAskedQuestion(models.Model):
         return self.question
 
 class Contact(models.Model):
-    CONTACT_IMAGES = []
+    icon = models.CharField(max_length=122, default='contact')
     name = models.CharField(max_length=122)
-    image = models.CharField(max_length=1, choices=CONTACT_IMAGES)
     contact = models.CharField(max_length=122)
 
     def __str__(self):
         return self.name
+    
+class Statistics(models.Model):
+    name = models.CharField(max_length=122, default='Company statistics')
+    clients = models.IntegerField(default=5)
+    projects = models.IntegerField(default=5)
+    workers = models.IntegerField(default=5)
+    hours_of_support = models.IntegerField(default=5)
+
+    def __str__(self):
+        return self.name
+    
+class Feedback(models.Model):
+    name = models.CharField(max_length=122)
+    email = models.CharField(max_length=122)
+    subject = models.CharField(max_length=244)
+    message = models.TextField()
+
+    def __str__(self):
+        return self.subject
+
     
 

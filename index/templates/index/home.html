@@ -78,12 +78,13 @@
 
   <!-- ======= Counts Section ======= -->
   <section id="counts" class="counts">
+    {% if statistics %}
     <div class="container">
       <div class="row counters">
         <div class="col-lg-3 col-6 text-center">
           <span
             data-purecounter-start="0"
-            data-purecounter-end="{{clients}}"
+            data-purecounter-end="{{statistics.clients}}"
             data-purecounter-duration="1"
             class="purecounter"
           ></span>
@@ -93,7 +94,7 @@
         <div class="col-lg-3 col-6 text-center">
           <span
             data-purecounter-start="0"
-            data-purecounter-end="{{projects}}"
+            data-purecounter-end="{{statistics.projects}}"
             data-purecounter-duration="1"
             class="purecounter"
           ></span>
@@ -103,7 +104,7 @@
         <div class="col-lg-3 col-6 text-center">
           <span
             data-purecounter-start="0"
-            data-purecounter-end="{{support_hours}}"
+            data-purecounter-end="{{statistics.hours_of_support}}"
             data-purecounter-duration="1"
             class="purecounter"
           ></span>
@@ -113,7 +114,7 @@
         <div class="col-lg-3 col-6 text-center">
           <span
             data-purecounter-start="0"
-            data-purecounter-end="workers"
+            data-purecounter-end="{{statistics.workers}}"
             data-purecounter-duration="1"
             class="purecounter"
           ></span>
@@ -121,6 +122,7 @@
         </div>
       </div>
     </div>
+    {% endif %}
   </section>
   <!-- End Counts Section -->
 
@@ -146,7 +148,7 @@
           data-aos="zoom-in"
           data-aos-delay="100"
         >
-          <div class="icon-box iconbox-blue">
+          <div class="icon-box iconbox-{{service.color}}">
             <div class="icon">
               <svg
                 width="100"
@@ -157,11 +159,11 @@
                 <path
                   stroke="none"
                   stroke-width="0"
-                  fill="#f5f5f5"
+                  fill="{{service.color}}"
                   d="M300,521.0016835830174C376.1290562159157,517.8887921683347,466.0731472004068,529.7835943286574,510.70327084640275,468.03025145048787C554.3714126377745,407.6079735673963,508.03601936045806,328.9844924480964,491.2728898941984,256.3432110539036C474.5976632858925,184.082847569629,479.9380746630129,96.60480741107993,416.23090153303,58.64404602377083C348.86323505073057,18.502131276798302,261.93793281208167,40.57373210992963,193.5410806939664,78.93577620505333C130.42746243093433,114.334589627462,98.30271207620316,179.96522072025542,76.75703585869454,249.04625023123273C51.97151888228291,328.5150500222984,13.704378332031375,421.85034740162234,66.52175969318436,486.19268352777647C119.04800174914682,550.1803526380478,217.28368757567262,524.383925680826,300,521.0016835830174"
                 ></path>
               </svg>
-              <i class="bx bxl-dribbble"></i>
+              <i class="bx bxl-{{service.svg}}"></i>
             </div>
             <h4><a href="">{{service.name}}</a></h4>
             <p>{{service.description}}</p>
@@ -189,7 +191,9 @@
         </p>
       </div>
 
+      {% if features %}
       <div class="row">
+        {% for feature in features %}
         <div
           class="col-lg-6 order-2 order-lg-1 d-flex flex-column align-items-lg-center"
         >
@@ -198,14 +202,16 @@
             data-aos="fade-up"
             data-aos-delay="100"
           >
-            <i class="bx bx-receipt"></i>
-            <h4>Customizable solutions</h4>
-            <p>
-              Data Idea can offer tailored solutions to meet the unique needs of
-              each client.
-            </p>
+            <i class="bx bx-{{feature.icon}}"></i>
+            <h4>{{feature.name}}</h4>
+            <p>{{feature.description}}</p>
           </div>
         </div>
+        {% endfor %}
+        <!-- End of Features -->
+        {% else %}
+        <div>No feature found</div>
+        {% endif %}
         <div
           class="image col-lg-6 order-1 order-lg-2"
           data-aos="zoom-in"
@@ -235,29 +241,31 @@
         data-aos="fade-up"
         data-aos-delay="100"
       >
+        {% if testimonials %}
         <div class="swiper-wrapper">
+          {% for testimonial in testimonials %}
           <div class="swiper-slide">
             <div class="testimonial-item">
               <p>
                 <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                Working with this company has been a game-changer for our
-                business. Their expertise in research, data analysis, and
-                machine learning has helped us uncover valuable insights and
-                make data-driven decisions. Their dedication, professionalism,
-                and top-notch services have exceeded our expectations.
+                {{testimonial.testimony}}
                 <i class="bx bxs-quote-alt-right quote-icon-right"></i>
               </p>
               <img
-                src="{% static 'img/testimonials/' %}"
+                src="{{testimonial.image.url}}"
                 class="testimonial-img"
-                alt=""
+                alt="{{testimonial.name}}"
               />
-              <h3>Tony Mungau</h3>
-              <h4>Founder, LearningToolSA</h4>
+              <h3>{{testimonial.name}}</h3>
+              <h4>{{testimonial.position}}</h4>
             </div>
           </div>
+          {% endfor %}
           <!-- End testimonial item -->
         </div>
+        {% else %}
+        <div>No testimony found</div>
+        {% endif %}
         <div class="swiper-pagination"></div>
       </div>
     </div>
@@ -333,22 +341,26 @@
         </p>
       </div>
 
+      {% if prices %}
       <div class="row">
+        {% for price in prices %}
         <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
           <div class="box">
-            <h3>Free</h3>
-            <h4><sup>$</sup>0<span> / project</span></h4>
+            <h3>{{price.name}}</h3>
+            <h4><sup>$</sup>{{price.price}}<span> / project</span></h4>
             <ul>
-              <li>1 professional web template</li>
-              <li>Machine learning consulting</li>
-              <li>Learning Courses and Material</li>
+              <li>{{price.service.name}}</li>
             </ul>
             <div class="btn-wrap">
-              <a href="tel:+25670152768" class="btn-buy">Buy Now</a>
+              <a href="tel:+25670152768" class="btn-buy">Get Now</a>
             </div>
           </div>
         </div>
+        {% endfor %}
       </div>
+      {% else %}
+      <div>No prices found</div>
+      {% endif %}
     </div>
   </section>
   <!-- End Pricing Section -->
@@ -366,7 +378,9 @@
       </div>
 
       <div class="faq-list">
+        {% if faqs %}
         <ul>
+          {% for faq in faqs %}
           <li data-aos="fade-up" data-aos="fade-up" data-aos-delay="100">
             <i class="bx bx-help-circle icon-help"></i>
             <a
@@ -374,7 +388,7 @@
               class="collapse"
               data-bs-target="#faq-list-1"
             >
-              What is statistical research?
+              {{ faq.question }}
               <i class="bx bx-chevron-down icon-show"></i
               ><i class="bx bx-chevron-up icon-close"></i
             ></a>
@@ -383,15 +397,14 @@
               class="collapse show"
               data-bs-parent=".faq-list"
             >
-              <p>
-                Statistical research involves collecting, analyzing, and
-                interpreting data to uncover patterns, relationships, and
-                trends. It helps in making informed decisions, identifying
-                insights, and drawing meaningful conclusions based on data.
-              </p>
+              <p>{{ faq.answer }}</p>
             </div>
           </li>
+          {% endfor %}
         </ul>
+        {% else %}
+        <div>No Frequently Asked Question Recorded</div>
+        {% endif %}
       </div>
     </div>
   </section>
@@ -410,15 +423,11 @@
         </p>
       </div>
 
+      <!-- Contact Section -->
       <div class="row">
-        <div class="col-lg-6">
-          <div class="info-box mb-4">
-            <i class="bx bx-map"></i>
-            <h3>Our Address</h3>
-            <p>UMF House, Sir Apollo Kaggwa Rd, Kampala</p>
-          </div>
-        </div>
-
+        {% if contacts %}
+        <!-- Contacts List -->
+        {% for contact in contacts %}
         <div class="col-lg-3 col-md-6">
           <div class="info-box mb-4">
             <i class="bx bx-envelope"></i>
@@ -426,15 +435,11 @@
             <p>datasideaofficial@gmail.com</p>
           </div>
         </div>
-
-        <div class="col-lg-3 col-md-6">
-          <div class="info-box mb-4">
-            <i class="bx bx-phone-call"></i>
-            <h3>Call Us</h3>
-            <p>+256 701 520 768</p>
-          </div>
-        </div>
-      </div>
+        {% endfor %}
+        <!-- End of Contacts -->
+        {% else %}
+        <div>No Contact Information</div>
+        {% endif %}
 
       <div class="row">
         <div class="col-lg-6">
@@ -452,7 +457,8 @@
         </div>
 
         <div class="col-lg-6">
-          <form action="" method="post" role="form" class="php-email-form">
+          <form action="{% url 'index:feedback' %}" method="post" class="php-email-form" >
+            {% csrf_token %}
             <div class="row">
               <div class="col-md-6 form-group">
                 <input
