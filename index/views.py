@@ -4,7 +4,7 @@ from .models import Feature
 from .models import Contact
 from .models import Feedback
 from .models import Portfolio
-from .models import Statistics
+from .models import CompanyInfo
 from .models import Testimonial
 from .models import FrequentlyAskedQuestion
 from django.shortcuts import render, redirect
@@ -19,8 +19,8 @@ def home(request):
     portfolios = Portfolio.objects.all()
     testimonials = Testimonial.objects.all()
     faqs = FrequentlyAskedQuestion.objects.all()
-    statistics = Statistics.objects.get(
-        name="Company statistics")
+    companyinfo = CompanyInfo.objects.get(
+        name="DataIdea")
     
     context = {
         'faqs': faqs,
@@ -28,7 +28,7 @@ def home(request):
         'services': services,
         'contacts': contacts,
         'features': features,
-        'statistics': statistics,
+        'companyinfo': companyinfo,
         'portfolios': portfolios,
         'testimonials': testimonials,
     }

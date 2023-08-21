@@ -4,8 +4,8 @@ from .models import Feature
 from .models import Contact
 from .models import Feedback
 from .models import Portfolio
-from .models import Statistics
 from .models import Testimonial
+from .models import CompanyInfo
 from django.contrib import admin
 from .models import FrequentlyAskedQuestion
 
@@ -18,7 +18,7 @@ class FeedbackAdmin(admin.ModelAdmin):
 # Register your models here.
 admin.site.register(model_or_iterable=Feedback, admin_class=FeedbackAdmin)
 admin.site.register(model_or_iterable=
-                    [Service, Feature, Testimonial, Portfolio, Statistics, Price, FrequentlyAskedQuestion, Contact])
+                    [Service, Feature, Testimonial, Portfolio, CompanyInfo, Price, FrequentlyAskedQuestion, Contact])
 
 
 

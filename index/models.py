@@ -67,8 +67,10 @@ class Contact(models.Model):
     def __str__(self):
         return self.name
     
-class Statistics(models.Model):
-    name = models.CharField(max_length=122, default='Company statistics')
+class CompanyInfo(models.Model):
+    name = models.CharField(max_length=122, default='DataIdea')
+    highlight = models.CharField(max_length=122, default='Better Digital Experience With DataIdea')
+    description = models.TextField(default='We are a team of talented researchers and developers providing the best services by optimizing the latest tech')
     clients = models.IntegerField(default=5)
     projects = models.IntegerField(default=5)
     workers = models.IntegerField(default=5)

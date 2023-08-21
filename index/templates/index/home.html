@@ -66,6 +66,9 @@
               <i class="bi bi-check-circle"></i> Tailored solutions to meet the
               unique needs of each client.
             </li>
+            <li>
+              <i class="bi bi-check-circle"></i> Laverage advanced ML and AI technologies to develop predictive models, automate processes, and improve decision making.
+            </li>
           </ul>
           <a href="#features" class="read-more"
             >Read More <i class="bi bi-long-arrow-right"></i
@@ -78,13 +81,13 @@
 
   <!-- ======= Counts Section ======= -->
   <section id="counts" class="counts">
-    {% if statistics %}
+    {% if companyinfo %}
     <div class="container">
       <div class="row counters">
         <div class="col-lg-3 col-6 text-center">
           <span
             data-purecounter-start="0"
-            data-purecounter-end="{{statistics.clients}}"
+            data-purecounter-end="{{companyinfo.clients}}"
             data-purecounter-duration="1"
             class="purecounter"
           ></span>
@@ -94,7 +97,7 @@
         <div class="col-lg-3 col-6 text-center">
           <span
             data-purecounter-start="0"
-            data-purecounter-end="{{statistics.projects}}"
+            data-purecounter-end="{{companyinfo.projects}}"
             data-purecounter-duration="1"
             class="purecounter"
           ></span>
@@ -104,7 +107,7 @@
         <div class="col-lg-3 col-6 text-center">
           <span
             data-purecounter-start="0"
-            data-purecounter-end="{{statistics.hours_of_support}}"
+            data-purecounter-end="{{companyinfo.hours_of_support}}"
             data-purecounter-duration="1"
             class="purecounter"
           ></span>
@@ -114,7 +117,7 @@
         <div class="col-lg-3 col-6 text-center">
           <span
             data-purecounter-start="0"
-            data-purecounter-end="{{statistics.workers}}"
+            data-purecounter-end="{{companyinfo.workers}}"
             data-purecounter-duration="1"
             class="purecounter"
           ></span>
