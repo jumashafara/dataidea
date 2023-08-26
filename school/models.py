@@ -3,10 +3,26 @@ from django.contrib.auth.models import User
 
 
 # Create your models here.
+class Tutor(models.Model):
+    name = models.CharField(max_length=122, default='New Tutor')
+    
+    def __str__(self):
+        return self.name
+    
+class Organization(models.Model):
+    name = models.CharField(max_length=122, default='DataIdea')
+    url = models.CharField(max_length=122, default='dataidea.com')
+
+    def __str__(self):
+        return self.name
 
 class Course(models.Model):
+    LEVELS = [('introductory', 'reception-1')]
     name = models.CharField(max_length=122, default='New Course')
-    description = models.CharField(max_length=122, default='New Course')
+    description = models.TextField(default='New Course')
+    organization = models.ForeignKey(to=Organization, default=0, on_delete=models.CASCADE)
+    tutors = models.ManyToManyField(to=Tutor, default='Not Identified')
+    level = models.CharField(max_length=22, choices=LEVELS, default='reception-1')
     learners = models.IntegerField(default=0)
 
     def __str__(self):
@@ -22,12 +38,6 @@ class Learner(models.Model):
         return self.user.username
 
 
-class Tutor(models.Model):
-    name = models.CharField(max_length=122, default='New Tutor')
-    course = models.ManyToManyField(to=Course)
-
-    def __str__(self):
-        return self.name
 
 
 class Video(models.Model):
