@@ -16,14 +16,25 @@ class Organization(models.Model):
     def __str__(self):
         return self.name
 
+
+class Video(models.Model):
+    name = models.CharField(max_length=122, default='New Video')
+    url = models.CharField(max_length=122, default='New Video')
+    def __str__(self):
+        return self.name
+
+
 class Course(models.Model):
-    LEVELS = [('introductory', 'reception-1')]
+    LEVELS = [('reception-1', 'Beginner'), ('reception-2', 'Intermediate'), ('reception-3', 'Advanced'), ('reception-4', 'Explorer'),]
     name = models.CharField(max_length=122, default='New Course')
     description = models.TextField(default='New Course')
+    image = models.ImageField(upload_to='course_images/', default='images/default.jpg')
     organization = models.ForeignKey(to=Organization, default=0, on_delete=models.CASCADE)
     tutors = models.ManyToManyField(to=Tutor, default='Not Identified')
+    url = models.CharField(max_length=122, default='No URLs provided attached')
     level = models.CharField(max_length=22, choices=LEVELS, default='reception-1')
     learners = models.IntegerField(default=0)
+    videos = models.ManyToManyField(to=Video, default='No Videos')
 
     def __str__(self):
         return self.name
@@ -37,15 +48,6 @@ class Learner(models.Model):
     def __str__(self):
         return self.user.username
 
-
-
-
-class Video(models.Model):
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    name = models.CharField(max_length=122, default='New Video')
-    url = models.CharField(max_length=122, default='New Video')
-    def __str__(self):
-        return self.name
 
 class Question(models.Model):
     video = models.ForeignKey(to=Video, on_delete=models.CASCADE)

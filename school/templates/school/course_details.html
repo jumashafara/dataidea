@@ -1,0 +1,138 @@
+{% extends 'components/base.html' %}
+<!-- Page Content -->
+{% block content %}
+<!-- Styles -->
+<style>
+  .video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio (for 100% width) */
+    height: 0;
+  }
+
+  .video-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+</style>
+<!-- End of Styles -->
+
+<main id="main">
+  <!-- ======= Breadcrumbs ======= -->
+  <section id="breadcrumbs" class="breadcrumbs">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <h2 class="p-2">{{course.name}} Details</h2>
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li><a href="{% url 'school:browse'%}">School</a></li>
+          <li>{{course.name}} Details</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+  <!-- End Breadcrumbs -->
+
+  <!-- ======= Portfolio Details Section ======= -->
+  <section id="portfolio-details" class="portfolio-details">
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-lg-8">
+          <div id="portfolio" class="portfolio">
+            <div class="container" data-aos="fade-up">
+              {% for video in videos %}
+              <div class="video-wrapper">
+                <iframe
+                  class="video-iframe"
+                  src="{{video.url}}?rel=0&loop=1"
+                  title="YouTube video player"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
+                  allowfullscreen
+                ></iframe>
+              </div>
+              {% endfor %}
+
+              <div class="pagination">
+                <span class="step-links">
+                  {% if videos.has_previous %}
+                  <a href="?page=1">&laquo; first</a>
+                  <a href="?page={{ videos.previous_page_number }}">previous</a>
+                  {% endif %}
+
+                  <span class="current">
+                    Page {{ videos.number }}
+                    <!-- Current number -->
+                    of
+                    <!-- Total number -->
+                    {{ videos.paginator.num_pages}}.
+                  </span>
+
+                  {% if videos.has_next %}
+                  <a href="?page={{ videos.next_page_number }}">next</a>
+                  <a href="?page={{ videos.paginator.num_pages }}"
+                    >last &raquo;</a
+                  >
+                  {% endif %}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="portfolio-info">
+            <h3>Course information</h3>
+            <ul>
+              <li><strong>Name</strong>: {{course.name}}</li>
+              <li>
+                <strong>Level</strong>:
+                <!-- Configure level -->
+                {% if course.level == 'reception-1'%}
+                <span>Beginner</span>
+                {% elif course.level == 'reception-2'%}
+                <span>Intermediate</span>
+                {% elif course.level == 'reception-3'%}
+                <span>Advanced</span>
+                {% elif course.level == 'reception-4'%}
+                <span>Explorer</span>
+                {% else %}
+                <span>{{course.level}}</span>
+                {% endif %}
+              </li>
+              <li><strong>Offered by</strong>: {{course.organization}}</li>
+              <li>
+                <strong>Tutors</strong>:
+                <!-- display tutors -->
+                {% for tutor in course.tutors.all %}
+                <span>{{tutor.name}},</span>
+                {% endfor %}
+              </li>
+              <li>
+                <strong>Course URL</strong>:
+                <a href="{{course.url}}">{{course.url}}</a>
+              </li>
+            </ul>
+          </div>
+          <div class="portfolio-description">
+            <h2>Project Description</h2>
+            <p>{{course.description}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Portfolio Details Section -->
+</main>
+<!-- End #main -->
+
+<!-- JavaScript -->
+<!-- Add this in your <head> section -->
+<script>
+  header = document.querySelector("#header");
+  header.style.background = "rgba(24, 6, 185, 0.8)";
+</script>
+
+{% endblock %}

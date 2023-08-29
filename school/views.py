@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Course
+from django.core.paginator import Paginator
 
 # Create your views here.
 def browse(request):
@@ -11,3 +12,16 @@ def browse(request):
     return render(request=request, 
                   template_name=template_name,
                    context=context )
+
+def course_details(request, id):
+    course = Course.objects.get(id=id)
+    videos = course.videos.all()
+    paginator = Paginator(videos, 1)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {'course': course,
+               'videos': page_obj}
+    template_name = 'school/course_details.html'
+    return render(request=request, 
+                  template_name=template_name, 
+                  context=context)

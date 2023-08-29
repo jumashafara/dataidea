@@ -10,7 +10,7 @@ from django.contrib import admin
 
 # admin models
 class CourseAdmin(admin.ModelAdmin):
-    filter_horizontal = ['tutors']
+    filter_horizontal = ['tutors', 'videos']
 
 
     

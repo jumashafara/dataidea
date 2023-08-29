@@ -42,15 +42,15 @@
                   <li>
                     <i class="bi bi-{{course.level}}"></i>
                     {% if course.level == 'reception-1'%}
-                    Introductory
-                    {% elif course.level == 'reception-2'%}
                     Beginner
-                    {% elif course.level == 'reception-3'%}
+                    {% elif course.level == 'reception-2'%}
                     Intermediate
-                    {% elif course.level == 'reception-4'%}
+                    {% elif course.level == 'reception-3'%}
                     Advanced
+                    {% elif course.level == 'reception-4'%}
+                    Explorer
                     {% else %}
-                    Exploratory
+                    {{course.level}}
                     {% endif %}
                   </li>
                   <li>
@@ -63,13 +63,13 @@
                   </li>
                 </ul>
                 <div class="btn-wrap">
-                  <a href="tel:+25670152768" class="btn-buy">ENROLL</a>
+                  <a href="{% url 'school:course_details' course.id %}" class="btn-buy">GET STARTED</a>
                 </div>
               </div>
             </div>
             {% endfor %}
             {% endif %}
-      </div>
+          </div>
   </section>
 </main>
 <!-- End #main -->
