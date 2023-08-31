@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Course
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def browse(request):
@@ -13,6 +14,7 @@ def browse(request):
                   template_name=template_name,
                    context=context )
 
+@login_required(login_url='accounts:signin')
 def course_details(request, id):
     course = Course.objects.get(id=id)
     videos = course.videos.all()
