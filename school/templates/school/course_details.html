@@ -42,19 +42,7 @@
         <div class="col-lg-8">
           <div id="portfolio" class="portfolio">
             <div class="container" data-aos="fade-up">
-              {% for video in videos %}
-              <div class="video-wrapper">
-                <iframe
-                  class="video-iframe"
-                  src="{{video.url}}?rel=0&loop=1"
-                  title="YouTube video player"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
-                  allowfullscreen
-                ></iframe>
-              </div>
-              {% endfor %}
-
+              <!-- Pagination -->
               <div class="pagination">
                 <span class="step-links">
                   {% if videos.has_previous %}
@@ -78,6 +66,22 @@
                   {% endif %}
                 </span>
               </div>
+              {% for video in videos %}
+              <div class="video-wrapper">
+                <iframe
+                  class="video-iframe"
+                  src="{{video.url}}?rel=0&loop=1"
+                  title="YouTube video player"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
+                  allowfullscreen
+                ></iframe>
+              </div>
+              <div>
+                <h5 class="p-3">{{video.name}}</h5>
+                <script src="{{video.gist}}"></script>
+              </div>
+              {% endfor %}
             </div>
           </div>
         </div>
@@ -117,7 +121,7 @@
             </ul>
           </div>
           <div class="portfolio-description">
-            <h2>Project Description</h2>
+            <h2>Course Description</h2>
             <p>{{course.description}}</p>
           </div>
         </div>

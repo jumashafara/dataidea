@@ -16,9 +16,8 @@
   </section>
   <!-- End Breadcrumbs -->
 
-  <section class="inner-page">
-    <div class="container">
-      <!-- Popular Courser -->
+  <section class="inner-page" style="padding: 0;" >
+    <!-- Popular Courser -->
       <div id="pricing" class="pricing section-bg">
         <div class="container p-3" data-aos="fade-up">
           <div class="section-title">
@@ -32,13 +31,14 @@
           <div class="row">
             {% if courses %}
             {% for course in courses %}
-            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-lg-3 col-md-6 mt-3" data-aos="fade-up" data-aos-delay="100">
               <div class="box">
                 <h3>{{course.name}}</h3>
                 <ul>
-                  <li>
+                  <li class="">
                     <i class="bi bi-{{course.level}}"></i>
-                    {% if course.level == 'reception-1'%}
+                    <span>
+                      {% if course.level == 'reception-1'%}
                     Beginner
                     {% elif course.level == 'reception-2'%}
                     Intermediate
@@ -49,14 +49,19 @@
                     {% else %}
                     {{course.level}}
                     {% endif %}
+                    </span>
                   </li>
-                  <li>
-                    <i class="bi bi-shield-fill"></i>
-                    {{course.organization}}
+                  <li class="">
+                    <i class="bi bi-buildings-fill"></i>
+                    <span>{{course.organization}}</span>
                   </li>
-                  <li>
+                  <li class="">
                     <i class="bi bi-person-fill"></i>
-                    Juma Shafara
+                    <span>
+                      {% for tutor in course.tutors.all %}
+                      {{tutor.name}},
+                      {% endfor %}
+                    </span>
                   </li>
                 </ul>
                 <div class="btn-wrap">
@@ -67,6 +72,7 @@
             {% endfor %}
             {% endif %}
           </div>
+        </div>
   </section>
 </main>
 <!-- End #main -->

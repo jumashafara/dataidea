@@ -48,14 +48,19 @@ def portfolio_details(request, id):
                   context=context)
 
 def feedback(request):
-    name = request.POST.get('name')
-    email = request.POST.get('email')
-    subject = request.POST.get('subject')
-    message = request.POST.get('message')
+    try:
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+        
+        feedback = Feedback(name=name, email=email, 
+                            subject=subject, message=message)
+        feedback.save()
+    
+        context = {'state': 'success', 'message': f'Thank you for contacting us {name}. We will get in touch as soon as possible.'}
+    except Exception as e:
+        context = {'state': 'warning', 'message': f'Something went wrong. Please try again later.'}
 
-    print (name, email, subject, message)
-    feedback = Feedback(name=name, email=email, 
-                        subject=subject, message=message)
-    feedback.save()
-
-    return redirect('index:home')
+    template_name='index/message.html'
+    return render(request=request, template_name=template_name, context=context)

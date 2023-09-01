@@ -1118,12 +1118,9 @@ section {
   padding: 0;
 }
 
-
 /* -----------------------------------------
 Login and Sign up
 --------------------------------------------- */
-
-
 
 /*--------------------------------------------------------------
 # Pricing
@@ -1406,7 +1403,7 @@ Login and Sign up
   margin: 0 10px -6px 0;
   border: 3px solid #18d26e;
   border-top-color: #eee;
-  animation: animate-loading 1s linear infinite;
+  animation: animate-loading 1s linear 2s;
 }
 
 .contact .php-email-form input,

@@ -20,6 +20,7 @@ class Organization(models.Model):
 class Video(models.Model):
     name = models.CharField(max_length=122, default='New Video')
     url = models.CharField(max_length=122, default='New Video')
+    gist = models.CharField(max_length=122, default='New Gist')
     def __str__(self):
         return self.name
 
