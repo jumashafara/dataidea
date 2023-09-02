@@ -355,7 +355,7 @@
               <li>{{price.service.name}}</li>
             </ul>
             <div class="btn-wrap">
-              <a href="tel:+25670152768" class="btn-buy">Get Now</a>
+              <a href="mailto:datasideaofficial@gmail.com?subject=Request%20For%20{{price.service.name}}" class="btn-buy">Get Now</a>
             </div>
           </div>
         </div>
@@ -433,6 +433,46 @@
         {% if contacts %}
         <!-- Contacts List -->
         {% for contact in contacts %}
+        <!-- Telephone -->
+        {% if contact.name == 'Call' %}
+        <a href="tel:{{contact.contact}}"
+        class="col-lg-3 col-md-6">
+          <div class="info-box mb-4">
+            <i class="bi bi-{{contact.icon}}"></i>
+            <h3>{{contact.name}}</h3>
+            <p>{{contact.contact}}</p>
+          </div>
+        </a>
+        <!-- Email -->
+        {% elif contact.name == 'Email'%}
+        <a href="mailto:{{contact.contact}}"
+        class="col-lg-3 col-md-6">
+          <div class="info-box mb-4">
+            <i class="bi bi-{{contact.icon}}"></i>
+            <h3>{{contact.name}}</h3>
+            <p>{{contact.contact}}</p>
+          </div>
+        </a>
+        <!-- WhatsApp -->
+        {% elif contact.name == 'WhatsApp'%}
+        <a href="https://wa.me/{{contact.contact}}"
+        class="col-lg-3 col-md-6">
+          <div class="info-box mb-4">
+            <i class="bi bi-{{contact.icon}}"></i>
+            <h3>{{contact.name}}</h3>
+            <p>{{contact.contact}}</p>
+          </div>
+        </a>
+        {% elif contact.name == 'Twitter'%}
+        <a href="https://twitter.com/{{contact.contact}}"
+        class="col-lg-3 col-md-6">
+          <div class="info-box mb-4">
+            <i class="bi bi-{{contact.icon}}"></i>
+            <h3>{{contact.name}}</h3>
+            <p>{{contact.contact}}</p>
+          </div>
+        </a>
+        {% else %}
         <div class="col-lg-3 col-md-6">
           <div class="info-box mb-4">
             <i class="bi bi-{{contact.icon}}"></i>
@@ -440,6 +480,7 @@
             <p>{{contact.contact}}</p>
           </div>
         </div>
+        {% endif %}
         {% endfor %}
         <!-- End of Contacts -->
         {% else %}
