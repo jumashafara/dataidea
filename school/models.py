@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Tutor(models.Model):
     name = models.CharField(max_length=122, default='New Tutor')
+    info = models.CharField(max_length=122, default='New Tutor')
     
     def __str__(self):
         return self.name
@@ -15,15 +16,24 @@ class Organization(models.Model):
 
     def __str__(self):
         return self.name
+    
 
+class Comment(models.Model):
+    approved = models.BooleanField(default=False) 
+    comment = models.TextField(default='New Comment')
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE, default=12)
+    def __str__(self):
+        return self.comment
+    
 
 class Video(models.Model):
     name = models.CharField(max_length=122, default='New Video')
     url = models.CharField(max_length=122, default='New Video')
     gist = models.CharField(max_length=122, default='New Gist')
+    comments = models.ManyToManyField(to=Comment, default=1)
     def __str__(self):
         return self.name
-
+    
 
 class Course(models.Model):
     LEVELS = [('reception-1', 'Beginner'), ('reception-2', 'Intermediate'), ('reception-3', 'Advanced'), ('reception-4', 'Explorer'),]
@@ -51,7 +61,7 @@ class Learner(models.Model):
 
 
 class Question(models.Model):
-    video = models.ForeignKey(to=Video, on_delete=models.CASCADE)
+    course = models.ForeignKey(to=Course, on_delete=models.CASCADE, null=True)
     question = models.CharField(max_length=122, default='New Question')
     answer = models.CharField(max_length=122, default='New Answer')
 

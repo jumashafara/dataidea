@@ -47,6 +47,9 @@ def portfolio_details(request, id):
                   template_name=template_name, 
                   context=context)
 
+def back(request):
+    return redirect(request.META.get('HTTP_REFERER'))
+
 def feedback(request):
     try:
         name = request.POST.get('name')
@@ -62,5 +65,5 @@ def feedback(request):
     except Exception as e:
         context = {'state': 'warning', 'message': f'Something went wrong. Please try again later.'}
 
-    template_name='index/message.html'
+    template_name='components/message.html'
     return render(request=request, template_name=template_name, context=context)
