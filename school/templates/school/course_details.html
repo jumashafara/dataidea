@@ -144,7 +144,7 @@
                 <strong>Tutors</strong>:
                 <!-- display tutors -->
                 {% for tutor in course.tutors.all %}
-                <span>{{tutor.name}},</span>
+                <a href="{{tutor.info}}">{{tutor.name}},</a>
                 {% endfor %}
               </li>
               <li>
