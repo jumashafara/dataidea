@@ -8,7 +8,10 @@
       <div class="d-flex justify-content-between align-items-center">
         <h2 class="p-2">Note Details</h2>
         <ol>
-          <li><a href="{% url 'school:add_note'%}">Notes</a></li>
+          <li><a href="/">Home</a></li>
+          <li><a href="{% url 'school:browse' %}">School</a></li>
+          <li><span>Tools</span></li>
+          <li><a href="{% url 'school:add_note' %}">Note List</a></li>
           <li>Note Details</li>
         </ol>
       </div>
