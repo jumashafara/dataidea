@@ -1,3 +1,4 @@
+from .models import Note
 from .models import Video
 from .models import Course
 from django.shortcuts import render
@@ -60,6 +61,42 @@ def comment(request, id):
         context = {'message': message, 'state': 'warning'}
         template_name = 'components/message.html'
         return render(request=request, template_name=template_name, context=context)
-        
+
+
+# Notes Section 
+def add_note(request):
+    if request.method == 'POST':
+        title = request.POST.get(key='title')
+        detail = request.POST.get(key='detail')
+        note = Note(title=title, detail=detail, user=request.user)
+        note.save()
+        return redirect(request.META.get('HTTP_REFERER'))
+    else:
+        user_notes = Note.objects.filter(user = request.user)
+        template_name = 'school/notes.html'
+        context = {'notes': user_notes}
+        return render(request=request, template_name=template_name, context=context)
+
+def one_note(request, id):
+    note = Note.objects.get(id=id)
+    if request.method == 'POST':
+        title = request.POST.get(key='title')
+        detail = request.POST.get(key='detail')
+        note = Note(title=title, detail=detail, user=request.user)
+        note.save()
+        return redirect(request.META.get('HTTP_REFERER'))
+    elif request.method == 'DELETE':
+        note.delete()
+    else:
+        template_name = 'school/note_detail.htmls'
+        context = {'note': note}
+        return render(request=request, template_name=template_name, context=context)
+
+
+
+
+
+
+
 
 # http://127.0.0.1:8000/schoolcourse-details/3?page=2

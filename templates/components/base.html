@@ -91,12 +91,26 @@
                 >Portfolio</a
               >
             </li>
-            <li>
-              <a
-                class="nav-link scrollto school"
-                href="{% url 'school:browse' %}"
-                >School</a
-              >
+            <li class="dropdown">
+              <a href=""
+                ><span>School</span> <i class="bi bi-chevron-down"></i
+              ></a>
+              <ul>
+                <li class="dropdown">
+                  <a href=""
+                    ><span>Tools</span> <i class="bi bi-chevron-right"></i
+                  ></a>
+                  <ul>
+                    <li><a href="{% url 'school:add_note' %}">Notes</a></li>
+                    <!-- <li><a href="">Video and Course Finder</a></li> -->
+                  </ul>
+                </li>
+                <li>
+                  <a class="nav-link scrollto" href="{% url 'school:browse' %}"
+                    >Browse Courses</a
+                  >
+                </li>
+              </ul>
             </li>
             <li>
               <a class="nav-link scrollto" href="{% url 'index:home' %}#contact"
@@ -277,7 +291,6 @@
     <script src="{% static 'vendor/glightbox/js/glightbox.min.js' %}"></script>
     <script src="{% static 'vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
     <script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}"></script>
-    <script src="{% static 'vendor/php-email-form/validate.js' %}"></script>
 
     <!-- Template Main JS File -->
     <script src="{% static 'js/main.js' %}"></script>
