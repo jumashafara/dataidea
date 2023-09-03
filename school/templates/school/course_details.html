@@ -230,6 +230,22 @@
                 {% endfor %}
               </li>
               <li>
+                <strong>Outline</strong>:
+                <ul>
+                  {% for video in course.videos.all %}
+                  <li>
+                    <span>{{forloop.counter}}.</span>
+                    <span
+                      ><a
+                        href="{% url 'school:course_details' course.id %}?page={{forloop.counter}}"
+                        >{{ video.name }}</a
+                      ></span
+                    >
+                  </li>
+                  {% endfor %}
+                </ul>
+              </li>
+              <li>
                 <strong>Course URL</strong>:
                 <a href="{{course.url}}">{{course.url}}</a>
               </li>
