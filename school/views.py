@@ -64,6 +64,7 @@ def comment(request, id):
 
 
 # Notes Section 
+@login_required(login_url='accounts:signin')
 def add_note(request):
     if request.method == 'POST':
         title = request.POST.get(key='title')
@@ -77,6 +78,7 @@ def add_note(request):
         context = {'notes': user_notes}
         return render(request=request, template_name=template_name, context=context)
 
+@login_required(login_url='accounts:signin')
 def one_note(request, id):
     try:
         note = Note.objects.get(id=id)
@@ -100,7 +102,7 @@ def one_note(request, id):
         return render(request=request, template_name=template_name, context=context)
 
 
-
+@login_required(login_url='accounts:signin')
 def delete_note(request, id):
     try:
         note = Note.objects.get(id=id)
