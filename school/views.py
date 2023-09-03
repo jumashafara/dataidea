@@ -78,21 +78,42 @@ def add_note(request):
         return render(request=request, template_name=template_name, context=context)
 
 def one_note(request, id):
-    note = Note.objects.get(id=id)
-    if request.method == 'POST':
-        title = request.POST.get(key='title')
-        detail = request.POST.get(key='detail')
-        note = Note(title=title, detail=detail, user=request.user)
-        note.save()
-        return redirect(request.META.get('HTTP_REFERER'))
-    elif request.method == 'DELETE':
-        note.delete()
-    else:
-        template_name = 'school/note_detail.htmls'
-        context = {'note': note}
+    try:
+        note = Note.objects.get(id=id)
+        if request.method == 'POST':
+            title = request.POST.get(key='title')
+            detail = request.POST.get(key='detail')
+            note = Note(title=title, detail=detail, user=request.user)
+            note.save()
+            return redirect(request.META.get('HTTP_REFERER'))
+        else:
+            template_name = 'school/note_detail.html'
+            context = {'note': note}
+            return render(request=request, template_name=template_name, context=context)
+    except Note.DoesNotExist as dne:
+        context = {'state': 'danger', 'message': 'Note does not exist!'}
+        template_name = 'components/message.html'
+        return render(request=request, template_name=template_name, context=context)
+    except Exception as e:
+        context = {'state': 'danger', 'message': 'An error occured while trying to fetch the note'}
+        template_name = 'components/message.html'
         return render(request=request, template_name=template_name, context=context)
 
 
+
+def delete_note(request, id):
+    try:
+        note = Note.objects.get(id=id)
+        note.delete()
+        return redirect(to='school:add_note')
+    except Note.DoesNotExist as dne:
+        context = {'state': 'warning', 'message': 'Note does not exist!'}
+        template_name = 'components/message.html'
+        return render(request=request, template_name=template_name, context=context)
+    except Exception as e:
+        context = {'state': 'warning', 'message': 'An error occured while trying to delete the note'}
+        template_name = 'components/message.html'
+        return render(request=request, template_name=template_name, context=context)
 
 
 

@@ -8,7 +8,7 @@
       <div class="d-flex justify-content-between align-items-center">
         <h2 class="p-2">Note Details</h2>
         <ol>
-          <li><a href="/">Home</a></li>
+          <li><a href="{% url 'school:add_note'%}">Notes</a></li>
           <li>Note Details</li>
         </ol>
       </div>
@@ -23,26 +23,25 @@
         <div class="col-lg-8">
           <div class="container">
             <h4>{{note.title}}</h4>
+            <pre class="p-3" style="background: whitesmoke">
+              <p>{{note.detail}}</p>
+            </pre>
+            <a
+              class="btn btn-danger"
+              href="{% url 'school:delete_note' note.id %}"
+            >
+              Delete
+            </a>
           </div>
         </div>
 
         <div class="col-lg-4">
           <div class="portfolio-info">
-            <h3>Project information</h3>
+            <h3>Note information</h3>
             <ul>
-              <li><strong>Name</strong>: {{portfolio.name}}</li>
-              <li><strong>Category</strong>: {{portfolio.category}}</li>
-              <li><strong>Client</strong>: {{portfolio.client}}</li>
-              <li><strong>Project date</strong>: {{portfolio.date}}</li>
-              <li>
-                <strong>Project URL</strong>:
-                <a href="{{portfolio.url}}">{{portfolio.url}}</a>
-              </li>
+              <li><strong>Date created</strong>: {{note.date_created}}</li>
+              <li><strong>Created by</strong>: {{note.user.username}}</li>
             </ul>
-          </div>
-          <div class="portfolio-description">
-            <h2>Project Description</h2>
-            <p>{{portfolio.description}}</p>
           </div>
         </div>
       </div>

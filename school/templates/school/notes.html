@@ -6,9 +6,10 @@
   <section class="breadcrumbs">
     <div class="container">
       <div class="d-flex justify-content-between align-items-center">
-        <h2>Inner Page</h2>
+        <h2>Notes List</h2>
         <ol>
           <li><a href="index.html">Home</a></li>
+          <li><span>Notes List</span></li>
         </ol>
       </div>
     </div>
@@ -16,11 +17,82 @@
   <!-- End Breadcrumbs -->
 
   <!-- Add Notes -->
-  {% for note in notes %}
-  <ul>
-    <li><a href="{% url 'school:one_note' %}"></a></li>
-  </ul>
-  {% endfor %}
+  <div class="container mt-3">
+    <!-- Add Notes -->
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button
+            class="accordion-button"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseOne"
+            aria-expanded="true"
+            aria-controls="collapseOne"
+          >
+            Add Note (Experimental)
+          </button>
+        </h2>
+        <div
+          id="collapseOne"
+          class="accordion-collapse collapse"
+          aria-labelledby="headingOne"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body d-flex row">
+            <form
+              action="{% url 'school:add_note' %}"
+              method="post"
+              class="d-flex flex-column"
+            >
+              {% csrf_token %}
+              <label for="title" class="w-100">
+                <input
+                  required
+                  type="text"
+                  name="title"
+                  id=""
+                  class="w-100 rounded border p-2"
+                  placeholder="write note title"
+                />
+              </label>
+              <label for="note" class="w-100 mt-2">
+                <textarea
+                  required
+                  name="detail"
+                  id=""
+                  cols="0"
+                  rows="5"
+                  class="w-100 rounded border p-2"
+                  placeholder="write your note detail here"
+                ></textarea>
+              </label>
+              <input
+                type="submit"
+                value="Save Note"
+                class="btn p-2 mt-2"
+                style="background-color: #6610f2; color: #fff"
+              />
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Notes -->
+    {% for note in notes %}
+    <div class="d-flex rounded mt-3 p-2 border justify-content-between">
+      <span>
+        <a class="" href="{% url 'school:one_note' note.id%}">{{note.title}}</a>
+      </span>
+      <span>
+        <a class="btn btn-danger" href="{% url 'school:delete_note' note.id %}">
+          Delete
+        </a>
+      </span>
+    </div>
+    {% endfor %}
+    <br />
+  </div>
   <!-- End Notes -->
 </main>
 <!-- End #main -->
