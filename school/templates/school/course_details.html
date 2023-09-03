@@ -48,14 +48,16 @@
                 <div class="accordion-item">
                   <h2 class="accordion-header" id="headingOne">
                     <button
-                      class="accordion-button"
+                      class="accordion-button fw-medium"
                       type="button"
+                      style="color: #6610f2"
                       data-bs-toggle="collapse"
                       data-bs-target="#collapseOne"
                       aria-expanded="true"
                       aria-controls="collapseOne"
                     >
-                      Add Note (Experimental)
+                      Add Note
+                      <i class="bi bi-pencil-square px-2"></i> (Experimental)
                     </button>
                   </h2>
                   <div
@@ -107,7 +109,7 @@
               <!-- Pagination -->
               <div class="pagination">
                 <span
-                  class="step-links d-flex justify-content-between w-100 w-md-50 fw-bold pb-3 bt-3"
+                  class="step-links d-flex justify-content-between w-100 w-md-50 mb-3 mt-3"
                 >
                   {% if videos.has_previous %}
                   <a href="?page=1">&laquo; First</a>
@@ -115,7 +117,7 @@
                   {% endif %}
 
                   <span class="current">
-                    Page {{ videos.number }}
+                    {{ videos.number }}
                     <!-- Current number -->
                     of
                     <!-- Total number -->
