@@ -30,7 +30,7 @@ class Video(models.Model):
     name = models.CharField(max_length=122, default='New Video')
     url = models.CharField(max_length=122, default='New Video')
     gist = models.CharField(max_length=122, default='New Gist')
-    comments = models.ManyToManyField(to=Comment, default=1)
+    comments = models.ManyToManyField(to=Comment, default=None)
     def __str__(self):
         return self.name
     

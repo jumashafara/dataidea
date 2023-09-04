@@ -15,6 +15,10 @@ class CourseAdmin(admin.ModelAdmin):
     filter_horizontal = ['tutors', 'videos']
 
 
+class VideoAdmin(admin.ModelAdmin):
+    filter_horizontal = []
+
+
     
 
 # Register your models here.
