@@ -1,0 +1,136 @@
+{% extends 'components/base.html' %}
+<!-- Page Content -->
+{% block content %}
+<main id="main">
+  <!-- ======= Breadcrumbs ======= -->
+  <section id="breadcrumbs" class="breadcrumbs">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <h2 class="p-2">{{blog.title}} details</h2>
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li><a href="{% url 'blog:blogs' %}">Blogs</a></li>
+          <li><span>{{blog.title}}</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+  <!-- End Breadcrumbs -->
+
+  <!-- ======= Portfolio Details Section ======= -->
+  <section id="portfolio-details" class="portfolio-details">
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-lg-8">
+          <div class="portfolio-details-slider swiper">
+            <div class="swiper-wrapper align-items-center">
+              <div class="swiper-slide">
+                <img src="{{blog.coverImage}}" alt="" />
+              </div>
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+          <div class="portfolio-description">
+            <!-- <h2>Project Description</h2> -->
+            {{details|safe}}
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <!-- Comments -->
+          <div class="portfolio-info">
+            <h3>Comments</h3>
+            <ul>
+              {% for comment in comments %}
+              <li>
+                <strong>
+                  <!-- End of staff -->
+                  {{comment.user}}
+                  <!-- If usesr is verified -->
+                  {% for group in comment.user.groups.all %}
+                  <!-- Check for Verified -->
+                  {% if group.name == 'Verified' %}
+                  <i class="bi bi-patch-check"></i>
+                  {% endif %} {% endfor %}
+                  <!-- If usesr is staff -->
+                  {% if comment.user.is_staff %}
+                  <!-- staff -->
+                  (staff) {% endif %}
+                </strong>
+                {{comment.comment}}
+              </li>
+              {% endfor %}
+            </ul>
+            <form
+              action="{% url 'blog:comment'%}"
+              method="post"
+              class="d-flex flex-column"
+            >
+              {% csrf_token %}
+              <input
+                type="hidden"
+                name="slug"
+                value="{{blog.slug}}-{{blog.cuid}}"
+              />
+              <label for="comment" class="w-100">
+                <input
+                  type="text"
+                  name="comment"
+                  id=""
+                  class="w-100 rounded border p-2"
+                  placeholder="&#64;{{user}} write your comment here"
+                />
+              </label>
+              <input
+                type="submit"
+                value="Comment"
+                class="btn p-2 mt-2"
+                style="background-color: #6610f2; color: #fff"
+              />
+            </form>
+          </div>
+          <!-- End of Comments -->
+          <div class="portfolio-info">
+            <h3>Project information</h3>
+            <ul>
+              <li><strong>Title</strong>: {{blog.title}}</li>
+              <li><strong>Author</strong>: {{blog.author.name}}</li>
+              <li><strong>Date created</strong>: {{blog.dateFeatured}}</li>
+              <li>
+                <strong>First Published at</strong>:
+                <a href="{{portfolio.url}}">{{portfolio.url}}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Portfolio Details Section -->
+</main>
+<!-- End #main -->
+
+<!-- JavaScript -->
+<script>
+  header = document.querySelector("#header");
+  header.style.background = "rgba(24, 6, 185, 0.8)";
+
+  // Wait for the DOM to be fully loaded
+  document.addEventListener("DOMContentLoaded", function () {
+    // Get the image element
+    var imgs = document.querySelectorAll("img");
+
+    // Check if the image element exists
+    if (imgs) {
+      imgs.forEach((img) => {
+        // Get the original src attribute
+        var originalSrc = img.getAttribute("src");
+        // Remove everything from 'align' onwards
+        var newSrc = originalSrc.split(" align=")[0];
+        // Set the new src attribute
+        img.setAttribute("src", newSrc);
+      });
+    }
+  });
+</script>
+
+{% endblock %}
