@@ -1,4 +1,5 @@
 from .models import Note
+from django.db.models import Q
 from .models import Video
 from .models import Course
 from django.shortcuts import render
@@ -9,6 +10,21 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 def browse(request):
     courses = Course.objects.all()
+    course_level_key_map = {'reception-1': 'Introduction'}
+    context = {'courses': courses,
+               'course_level_key_map': course_level_key_map}
+    template_name = 'school/browse.html'
+    return render(request=request, 
+                  template_name=template_name,
+                   context=context )
+
+
+def searchCourses(request):
+    query = request.POST.get(key='query')
+    courses = Course.objects.filter(
+        Q(name__icontains=query) |
+        Q(description__icontains=query)
+    )
     course_level_key_map = {'reception-1': 'Introduction'}
     context = {'courses': courses,
                'course_level_key_map': course_level_key_map}

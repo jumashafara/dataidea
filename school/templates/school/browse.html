@@ -11,6 +11,28 @@
           <li><a href="{% url 'index:home' %}">Home</a></li>
           <li>School</li>
         </ol>
+        <form
+              action="{% url 'school:search_courses'%}"
+              method="post"
+              class="d-flex mt-2"
+            >
+              {% csrf_token %}
+              <label for="query" class="">
+                <input
+                  type="text"
+                  name="query"
+                  id=""
+                  class="w-100 rounded border p-2"
+                  placeholder="&#64;{{user}} search courses"
+                />
+              </label>
+              <input
+                type="submit"
+                value="Search"
+                class="btn p-2 mx-2"
+                style="background-color: #6610f2; color: #fff"
+              />
+            </form>
       </div>
     </div>
   </section>
