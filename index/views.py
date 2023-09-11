@@ -6,6 +6,7 @@ from .models import Feedback
 from .models import Portfolio
 from .models import CompanyInfo
 from .models import Testimonial
+from .models import TermOfService
 from .models import FrequentlyAskedQuestion
 from django.shortcuts import render, redirect
 
@@ -66,4 +67,11 @@ def feedback(request):
         context = {'state': 'warning', 'message': f'Something went wrong. Please try again later.'}
 
     template_name='components/message.html'
+    return render(request=request, template_name=template_name, context=context)
+
+def termsOfService(request):
+    terms_of_service = TermOfService.objects.all()
+    context = {'terms_of_service':terms_of_service}
+    
+    template_name='index/terms_of_service.html'
     return render(request=request, template_name=template_name, context=context)

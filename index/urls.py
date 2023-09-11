@@ -9,5 +9,6 @@ urlpatterns = [
     path(route='back/', view=views.back, name='back'),
     path(route='school/', view=include('school.urls'), name='school'),
     path(route='feedback/', view=views.feedback, name='feedback'),
+    path(route='terms_of_service', view=views.termsOfService, name='terms_of_service'),
     path(route='portfolio_details/<int:id>', view=views.portfolio_details, name='portfolio_details')
 ]
