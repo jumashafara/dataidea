@@ -7,6 +7,7 @@ from .models import Portfolio
 from .models import CompanyInfo
 from .models import Testimonial
 from .models import TermOfService
+from .models import PrivacyPolicy
 from .models import FrequentlyAskedQuestion
 from django.shortcuts import render, redirect
 
@@ -74,4 +75,11 @@ def termsOfService(request):
     context = {'terms_of_service':terms_of_service}
     
     template_name='index/terms_of_service.html'
+    return render(request=request, template_name=template_name, context=context)
+
+def privacyPolicy(request):
+    privacy_policy = PrivacyPolicy.objects.all()
+    context = {'privacy_policy':privacy_policy}
+    
+    template_name='index/privacy_policy.html'
     return render(request=request, template_name=template_name, context=context)
