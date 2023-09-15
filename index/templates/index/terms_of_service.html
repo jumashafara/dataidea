@@ -21,12 +21,12 @@
     {% if terms_of_service %}
     <!-- Display Term -->
     {% for term in terms_of_service %}
-    <ol class="">
+    <ul class="">
       <li>
         <h5 class="">{{term.name}}</h5>
         <p>{{term.description}}</p>
       </li>
-    </ol>
+    </ul>
     {% endfor %}
     <!-- End Term -->
     {% else %}

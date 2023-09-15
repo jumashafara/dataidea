@@ -21,17 +21,22 @@ def browse(request):
 
 def searchCourses(request):
     query = request.POST.get(key='query')
-    courses = Course.objects.filter(
-        Q(name__icontains=query) |
-        Q(description__icontains=query)
-    )
-    course_level_key_map = {'reception-1': 'Introduction'}
-    context = {'courses': courses,
-               'course_level_key_map': course_level_key_map}
-    template_name = 'school/browse.html'
-    return render(request=request, 
-                  template_name=template_name,
-                   context=context )
+
+    if query:
+        courses = Course.objects.filter(
+            Q(name__icontains=query) |
+            Q(description__icontains=query)
+        )
+        course_level_key_map = {'reception-1': 'Introduction'}
+        context = {'courses': courses,
+                'course_level_key_map': course_level_key_map}
+        template_name = 'school/browse.html'
+        return render(request=request, 
+                    template_name=template_name,
+                    context=context )
+    
+    elif query == '' or query == None:
+        return redirect('school:browse')
 
 # @login_required(login_url='accounts:signin')
 def course_details(request, id):

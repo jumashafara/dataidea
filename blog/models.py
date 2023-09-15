@@ -15,9 +15,9 @@ class Blog(models.Model):
     cuid = models.CharField(max_length=122, default='New Cuid')
     title = models.CharField(max_length=122)
     brief = models.TextField(default='')
-    cover_image = models.CharField(max_length=122, default='')
+    cover_image = models.CharField(max_length=122, default='no image')
     popularity = models.FloatField(default=0)
-    date_featured = models.CharField(max_length=122, default='', null=True)
+    date_featured = models.CharField(max_length=122, default='no date', null=True)
     content_markdown = models.TextField(default='')
 
     def __str__(self):
@@ -27,7 +27,7 @@ class Blog(models.Model):
 class BlogComment(models.Model):
     approved = models.BooleanField(default=False) 
     comment = models.TextField(default='New Comment')
-    user = models.ForeignKey(to=User, on_delete=models.CASCADE, default=None)
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE, default=12)
     blog = models.ForeignKey(to=Blog, on_delete=models.CASCADE, default=None)
 
     def __str__(self):

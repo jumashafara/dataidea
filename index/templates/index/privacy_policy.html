@@ -21,12 +21,12 @@
     {% if privacy_policy %}
     <!-- Display Term -->
     {% for policy in privacy_policy %}
-    <ol class="">
+    <ul class="">
       <li>
         <h5 class="">{{policy.name}}</h5>
         <p>{{policy.description}}</p>
       </li>
-    </ol>
+    </ul>
     {% endfor %}
     <!-- End Term -->
     {% else %}

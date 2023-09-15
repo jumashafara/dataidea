@@ -1,10 +1,11 @@
 import requests
 import markdown
-from django.db.models import Q
 from . models import Blog
+from django.db.models import Q
 from . models import BlogComment
 from django.shortcuts import render
 from django.shortcuts import redirect
+from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 
 # Create your views here.
@@ -122,16 +123,23 @@ def blogDetails(request):
 
 # Comments
 def comment(request):
+
+    if request.user.is_anonymous:
+        user = User.objects.get(id=12)
+    else:
+        user = request.user
+
     try:
         comment = BlogComment(
             comment = request.POST.get(key='comment'),
-            blog_slug = request.POST.get(key='slug'),
-            user = request.user
+            blog = Blog.objects.get(slug=request.POST.get(key='slug')),
+            user = user
         )
 
         comment.save()
         return redirect(request.META.get('HTTP_REFERER'))
     except Exception as e:
+        print(e)
         context = {'message': 'An error occured while trying to add your comment', 'state':  'danger'}
         template_name = 'components/message.html'
         return render(request=request, template_name=template_name, context=context)
