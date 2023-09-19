@@ -16,6 +16,9 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+# Site Id
+# SITE_ID = 1
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -31,6 +34,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.sites',
     'accounts.apps.AccountsConfig',
     'blog.apps.BlogConfig',
     'index.apps.IndexConfig',

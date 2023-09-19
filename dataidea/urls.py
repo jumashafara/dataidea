@@ -27,7 +27,7 @@ urlpatterns = [
     path(route='', view=include('index.urls'), name='index'),
     path(route='accounts/', view=include('accounts.urls'), name='accounts'),
     path(route='school/', view=include('school.urls'), name='school'),
-    path(route='blog/', view=include('blog.urls'), name='blog')
-]
+    path(route='blog/', view=include('blog.urls'), name='blog'),
+    ]
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
