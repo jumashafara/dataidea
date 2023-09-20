@@ -70,25 +70,39 @@
                 >Home</a
               >
             </li>
-            <li>
-              <a
-                class="nav-link scrollto about"
-                href="{% url 'index:home' %}#about"
-                >About</a
-              >
+            <li class="dropdown">
+              <a href="#"
+                ><span>About</span> <i class="bi bi-chevron-down"></i
+              ></a>
+              <ul>
+                <li>
+                  <a
+                    class="nav-link scrollto"
+                    href="{% url 'index:home' %}#about"
+                    >About Us</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="nav-link scrollto"
+                    href="{% url 'index:home' %}#portfolio"
+                    >Portfolio</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="nav-link scrollto"
+                    href="{% url 'index:home' %}#partners"
+                    >Partners</a
+                  >
+                </li>
+              </ul>
             </li>
             <li>
               <a
                 class="nav-link scrollto services"
                 href="{% url 'index:home' %}#services"
                 >Services</a
-              >
-            </li>
-            <li>
-              <a
-                class="nav-link scrollto portfolio"
-                href="{% url 'index:home' %}#portfolio"
-                >Portfolio</a
               >
             </li>
             <li class="dropdown">
@@ -112,10 +126,32 @@
                 </li>
               </ul>
             </li>
-            <li>
-              <a class="nav-link scrollto" href="{% url 'blog:blogs' %}"
-                >Blog</a
-              >
+            <li class="dropdown">
+              <a href="#"
+                ><span>Resources</span> <i class="bi bi-chevron-down"></i
+              ></a>
+              <ul>
+                <li>
+                  <a class="nav-link scrollto" href="{% url 'blog:blogs' %}"
+                    >Blog</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="nav-link scrollto"
+                    target="_blank"
+                    href="https://dataideaforum.pythonanywhere.com/"
+                    >Forum</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="nav-link scrollto"
+                    href="{% url 'index:home' %}#newsletter"
+                    >Newsletter</a
+                  >
+                </li>
+              </ul>
             </li>
             <li>
               <a class="nav-link scrollto" href="{% url 'index:home' %}#contact"
@@ -145,12 +181,6 @@
                 {% endif %}
               </ul>
             </li>
-
-            <!-- <li>
-              <a class="getstarted scrollto" href="{% url 'accounts:signin' %}"
-                >Get Started</a
-              >
-            </li> -->
           </ul>
           <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>
@@ -234,7 +264,7 @@
               </ul>
             </div>
 
-            <div class="col-lg-4 col-md-6 footer-newsletter">
+            <div class="col-lg-4 col-md-6 footer-newsletter" >
               <iframe
                 src="https://embeds.beehiiv.com/5fc7c425-9c7e-4e08-a514-ad6c22beee74"
                 data-test-id="beehiiv-embed"
@@ -254,7 +284,7 @@
         </div>
       </div>
 
-      <div class="container">
+      <div class="container" id="newsletter">
         <div class="copyright-wrap d-md-flex py-4">
           <div class="me-md-auto text-center text-md-start">
             <div class="copyright">

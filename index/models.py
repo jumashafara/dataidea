@@ -43,6 +43,15 @@ class Portfolio(models.Model):
         return self.name
     
 
+class Partner(models.Model):
+    name = models.CharField(max_length=122, default='Partner')
+    image = models.CharField(max_length=122, default='partner')
+    url = models.CharField(max_length=100, default='No url')
+
+    def __str__(self):
+        return self.name
+    
+
 class Price(models.Model):
     name = models.CharField(max_length=122)
     price = models.CharField(max_length=122)

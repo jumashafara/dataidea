@@ -2,6 +2,7 @@ from .models import Price
 from .models import Service
 from .models import Feature
 from .models import Contact
+from .models import Partner
 from .models import Feedback
 from .models import Portfolio
 from .models import CompanyInfo
@@ -10,6 +11,7 @@ from .models import TermOfService
 from .models import PrivacyPolicy
 from .models import FrequentlyAskedQuestion
 from django.shortcuts import render, redirect
+from django.core.paginator import Paginator
 
 
 # Create your views here.
@@ -18,11 +20,17 @@ def home(request):
     services = Service.objects.all()
     contacts = Contact.objects.all()
     features = Feature.objects.all()
+    partners = Partner.objects.all()
     portfolios = Portfolio.objects.all()
     testimonials = Testimonial.objects.all()
     faqs = FrequentlyAskedQuestion.objects.all()
     companyinfo = CompanyInfo.objects.get(
         name="DataIdea")
+    
+    # partner pagination
+    paginator = Paginator(partners, 4)
+    page_number = request.GET.get('page')
+    partners_obj = paginator.get_page(page_number)
     
     context = {
         'faqs': faqs,
@@ -30,6 +38,7 @@ def home(request):
         'services': services,
         'contacts': contacts,
         'features': features,
+        'partners': partners_obj,
         'companyinfo': companyinfo,
         'portfolios': portfolios,
         'testimonials': testimonials,

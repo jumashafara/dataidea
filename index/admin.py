@@ -3,6 +3,7 @@ from .models import Service
 from .models import Feature
 from .models import Contact
 from .models import Feedback
+from .models import Partner
 from .models import Portfolio
 from .models import Testimonial
 from .models import CompanyInfo
@@ -20,7 +21,7 @@ class FeedbackAdmin(admin.ModelAdmin):
 # Register your models here.
 admin.site.register(model_or_iterable=Feedback, admin_class=FeedbackAdmin)
 admin.site.register(model_or_iterable=
-                    [PrivacyPolicy, TermOfService, Service, Feature, Testimonial, Portfolio, CompanyInfo, Price, FrequentlyAskedQuestion, Contact])
+                    [Partner, PrivacyPolicy, TermOfService, Service, Feature, Testimonial, Portfolio, CompanyInfo, Price, FrequentlyAskedQuestion, Contact])
 
 
 
