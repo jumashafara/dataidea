@@ -1671,3 +1671,9 @@ Login and Sign up
   color: #fff;
   text-decoration: none;
 }
+
+/* Custom */
+code {
+  color: #7b27d8;
+  white-space: unset;
+}

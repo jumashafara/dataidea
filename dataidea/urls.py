@@ -25,9 +25,10 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns = [
     path(route = 'admin/', view=admin.site.urls),
     path(route='', view=include('index.urls'), name='index'),
-    path(route='accounts/', view=include('accounts.urls'), name='accounts'),
+    path(route='blog/', view=include('blog.urls'), name='blog'),
     path(route='school/', view=include('school.urls'), name='school'),
-    path(route='blog/', view=include('blog.urls'), name='blog')
+    path(route='profiles/', view=include('profiles.urls'), name='profiles'),
+    path(route='accounts/', view=include('accounts.urls'), name='accounts'),
 ]
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
