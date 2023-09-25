@@ -1674,6 +1674,14 @@ Login and Sign up
 
 /* Custom */
 code {
-  color: #7b27d8;
-  white-space: unset;
+  display: block;
+  color: #444444;
+  font-family: "Roboto Mono", "Space Mono", monospace;
+  white-space: pre;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  max-height: 300px;
+  overflow-y: auto;
 }
