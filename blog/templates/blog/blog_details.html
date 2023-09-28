@@ -6,7 +6,7 @@
   <section id="breadcrumbs" class="breadcrumbs">
     <div class="container">
       <div class="d-flex justify-content-between align-items-center">
-        <h2 class="p-2">{{blog.title}} details</h2>
+        <h2 class="p-2">{{blog.title}}</h2>
         <ol>
           <li><a href="/">Home</a></li>
           <li><a href="{% url 'blog:blogs' %}">Blogs</a></li>
@@ -66,11 +66,7 @@
               class="d-flex flex-column"
             >
               {% csrf_token %}
-              <input
-                type="hidden"
-                name="slug"
-                value="{{blog.slug}}"
-              />
+              <input type="hidden" name="slug" value="{{blog.slug}}" />
               <label for="comment" class="w-100">
                 <input
                   type="text"
@@ -90,10 +86,10 @@
           </div>
           <!-- End of Comments -->
           <div class="portfolio-info">
-            <h3>Project information</h3>
+            <h3>Blog information</h3>
             <ul>
               <li><strong>Title</strong>: {{blog.title}}</li>
-              <li><strong>Author</strong>: {{blog.author.name}}</li>
+              <li><strong>Author</strong>: Juma Shafara </li>
               <li><strong>Date created</strong>: {{blog.dateFeatured}}</li>
               <li>
                 <strong>First Published at</strong>:
@@ -128,7 +124,7 @@
         var newSrc = originalSrc.split(" align=")[0];
         // Set the new src attribute
         img.setAttribute("src", newSrc);
-        img.classList.add("img-fluid")
+        img.classList.add("img-fluid");
       });
     }
   });

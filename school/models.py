@@ -26,11 +26,40 @@ class Comment(models.Model):
         return self.comment
     
 
+class Quiz(models.Model):
+    name = models.CharField(max_length=255, default='New Quiz')
+    description = models.TextField(null=True, blank=True)
+    # Add any other fields you need for your quiz
+
+    def __str__(self):
+        return self.name
+
+
+class Question(models.Model):
+    quiz = models.ForeignKey(to=Quiz, on_delete=models.CASCADE, 
+        related_name='questions', null=True, blank=True)
+    text = models.TextField(null=True, blank=True)
+    # Add any other fields you need for your questions
+    
+    def __str__(self):
+        return self.text
+
+class Choice(models.Model):
+    question = models.ForeignKey(to=Question, on_delete=models.CASCADE)
+    text = models.CharField(max_length=255)
+    is_correct = models.BooleanField(default=False)
+    # Add any other fields you need for choices
+    
+    def __str__(self):
+        return self.question 
+
+
 class Video(models.Model):
     name = models.CharField(max_length=122, default='New Video')
     url = models.CharField(max_length=122, default='New Video')
     gist = models.CharField(max_length=122, default='New Gist')
     comments = models.ManyToManyField(to=Comment, default=None)
+    quiz = models.OneToOneField(to=Quiz, on_delete=models.CASCADE, null=True, blank=True)
     def __str__(self):
         return self.name
     
@@ -69,22 +98,7 @@ class Learner(models.Model):
         return self.user.username
 
 
-class Question(models.Model):
-    course = models.ForeignKey(to=Course, on_delete=models.CASCADE, null=True)
-    question = models.CharField(max_length=122, default='New Question')
-    answer = models.CharField(max_length=122, default='New Answer')
 
-    def __str__(self):
-        return self.question
-    
-
-class Quiz(models.Model):
-    course = models.ForeignKey(to=Course, on_delete=models.CASCADE)
-    name = models.CharField(max_length=122, default='New Quiz')
-    questions = models.ManyToManyField(to=Question)
-
-    def __str__(self):
-        return self.name
     
 
 

@@ -1682,6 +1682,6 @@ code {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  max-height: 300px;
+  max-height: 400px;
   overflow-y: auto;
 }

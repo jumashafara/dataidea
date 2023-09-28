@@ -1,0 +1,70 @@
+{% extends 'components/base.html' %}
+<!-- Page Content -->
+{% block content %}
+<!-- Load extras -->
+{% load school_extras %}
+<main id="main">
+  <!-- ======= Breadcrumbs ======= -->
+  <section class="breadcrumbs">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <h2>School</h2>
+        <ol>
+          <li><a href="{% url 'index:home' %}">Home</a></li>
+          <li><a href="{% url 'school:browse' %}">School</a></li>
+          <li>Quiz</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+  <!-- End Breadcrumbs -->
+
+  <section class="inner-page" style="padding: 0">
+    <!-- Popular Courser -->
+    <div id="pricing" class="pricing section-bg">
+      <div class="container p-3" data-aos="fade-up">
+        <div class="section-title">
+          <h2>{{ quiz.name }} Results</h2>
+          <p>{{ quiz.description }}</p>
+        </div>
+
+        <div class="mt-3" data-aos="fade-up" data-aos-delay="100">
+          {% for question in questions %}
+          <h4>{{ question.text }}</h4>
+          <p>
+            Your Answer(s):
+            <!-- For all answers -->
+            {% for choice_id in user_answers|default:question.id %}
+            <!-- Display -->
+            {{ choice_id|choice_text:question.id }}
+            <!-- if not last -->
+            {% if not forloop.last%}, {% endif %}
+            <!-- Endfor -->
+            {% endfor %}
+          </p>
+          <p>
+            Correct Answer(s):
+            <!-- For correct -->
+            {% for correct_choice in correct_answers|default:question.id %}
+            <!-- Show correct -->
+            {{ correct_choice }}
+            <!-- If not last -->
+            {% if not forloop.last %}, {% endif %}
+            <!-- Endfor -->
+            {% endfor %}
+          </p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<!-- End #main -->
+
+<!-- JavaScript -->
+<script>
+  document.querySelector("#header").style.background = "rgba(24, 6, 185, 0.8)";
+
+  document.querySelector(".school").classList.add("active");
+</script>
+{% endblock %}

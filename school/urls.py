@@ -11,5 +11,6 @@ urlpatterns = [
     path(route='one_note/<int:id>', view=views.one_note, name='one_note'),
     path(route='comment/<int:id>', view=views.comment, name='comment'),
     path(route='course-details/<int:id>', view=views.course_details, name='course_details'),
+    path(route='quiz/<int:quiz_id>/', view=views.quiz_view, name='quiz_view'),
 
 ]

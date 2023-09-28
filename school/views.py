@@ -1,13 +1,51 @@
+from .models import Quiz
 from .models import Note
-from django.db.models import Q
 from .models import Video
 from .models import Course
+from .models import Question
+from django.db.models import Q
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 
+from collections import defaultdict
+
 # Create your views here.
+
+def quiz_view(request, quiz_id):
+    quiz = Quiz.objects.get(pk=quiz_id)
+    questions = quiz.questions.all()
+
+    # Calculate correct answers for each question
+    correct_answers = {}
+    for question in questions:
+        correct_choices = question.choice_set.filter(is_correct=True)
+        correct_answers[question.id] = [choice.text for choice in correct_choices]
+
+    if request.method == 'POST':
+        score = 0
+        user_answers = defaultdict(list)
+
+        for question in questions:
+            selected_choice_id = request.POST.get(f'question_{question.id}', None)
+            if selected_choice_id:
+                selected_choice = question.choice_set.get(pk=selected_choice_id)
+                user_answers[question.id].append(selected_choice.text)  # Store user's answer
+
+                # Check if the selected choice is correct
+                if selected_choice.is_correct:
+                    score += 1
+
+        # You can also store the user's score in the user's profile or a separate model here
+
+        return render(request, 'school/results.html',
+                      {'quiz': quiz, 'questions': questions,
+                       'user_answers': user_answers, 'score': score, 'correct_answers': correct_answers})
+
+    return render(request, 'school/quiz.html', {'quiz': quiz, 'questions': questions})
+
+
 def browse(request):
     courses = Course.objects.all()
     course_level_key_map = {'reception-1': 'Introduction'}

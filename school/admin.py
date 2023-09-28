@@ -3,9 +3,10 @@ from .models import Note
 from .models import Tutor
 from .models import Video
 from .models import Course
+from .models import Choice
 from .models import Learner
-from .models import Question
 from .models import Comment
+from .models import Question
 from .models import Organization
 from django.contrib import admin
 
@@ -23,5 +24,5 @@ class VideoAdmin(admin.ModelAdmin):
 
 # Register your models here.
 admin.site.register(model_or_iterable=Course, admin_class=CourseAdmin)
-admin.site.register(model_or_iterable=[Note, Comment,Organization, Quiz, Tutor, Video, Learner, Question])
+admin.site.register(model_or_iterable=[Choice, Note, Comment,Organization, Quiz, Tutor, Video, Learner, Question])
 
