@@ -21,17 +21,15 @@ def quiz_view(request, quiz_id):
     correct_answers = {}
     for question in questions:
         correct_choices = question.choice_set.filter(is_correct=True)
-        correct_answers[question.id] = [choice.text for choice in correct_choices]
+        correct_answers[f'{question.id}'] = [choice.text for choice in correct_choices]
 
     if request.method == 'POST':
         score = 0
-        user_answers = defaultdict(list)
 
         for question in questions:
             selected_choice_id = request.POST.get(f'question_{question.id}', None)
             if selected_choice_id:
                 selected_choice = question.choice_set.get(pk=selected_choice_id)
-                user_answers[question.id].append(selected_choice.text)  # Store user's answer
 
                 # Check if the selected choice is correct
                 if selected_choice.is_correct:
@@ -41,7 +39,7 @@ def quiz_view(request, quiz_id):
 
         return render(request, 'school/results.html',
                       {'quiz': quiz, 'questions': questions,
-                       'user_answers': user_answers, 'score': score, 'correct_answers': correct_answers})
+                       'score': score, 'correct_answers': correct_answers})
 
     return render(request, 'school/quiz.html', {'quiz': quiz, 'questions': questions})
 

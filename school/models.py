@@ -51,7 +51,7 @@ class Choice(models.Model):
     # Add any other fields you need for choices
     
     def __str__(self):
-        return self.question 
+        return f'{self.question}, {self.text}, {self.is_correct}' 
 
 
 class Video(models.Model):

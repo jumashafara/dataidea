@@ -1,7 +1,6 @@
 {% extends 'components/base.html' %}
 <!-- Page Content -->
 {% block content %}
-<!-- Load extras -->
 {% load school_extras %}
 <main id="main">
   <!-- ======= Breadcrumbs ======= -->
@@ -19,44 +18,50 @@
   </section>
   <!-- End Breadcrumbs -->
 
-  <section class="inner-page" style="padding: 0">
+  <section class="inner-page" style="padding: 0;" >
     <!-- Popular Courser -->
-    <div id="pricing" class="pricing section-bg">
-      <div class="container p-3" data-aos="fade-up">
-        <div class="section-title">
-          <h2>{{ quiz.name }} Results</h2>
-          <p>{{ quiz.description }}</p>
+      <div id="pricing" class="pricing section-bg">
+        <div class="container p-3" data-aos="fade-up">
+          <div class="section-title">
+            <h2>{{ quiz.name }} Results</h2>
+            <p>
+                {{ quiz.description }}
+            </p>
+          </div>
+          
+          <div class="container mt-4" data-aos="fade-up" data-aos-delay="100">
+              <div class="row justify-content-center">
+                  <div class="col-lg-6">
+                    <div class="d-flex justify-content-between p-3">
+                      <h2>Your Score: {{ score }} out of {{ questions.count }}</h2>
+                      <a href="{% url 'school:quiz' quiz.id %}" 
+                      class="text-decoration-underline fw-bold" >Try again</a>
+                    </div>
+                    {% for question in questions %}
+                    <div class="card mb-4">
+                      <div class="card-header text-white" style="background-color: rgba(24, 6, 185, 0.8);">
+                        <h6 class="mb-0">{{ question.text }}</h6>
+                      </div>
+                      <div class="card-body">
+                        {% for choice in question.choice_set.all %}
+                        <div class="form-check mb-2">
+                          <p>
+                            {% if choice.is_correct %}
+                            {{choice.text}}
+                            <i class="bi bi-check-circle-fill text-success"></i>
+                            {% else %}
+                            {{choice.text}}
+                            {% endif %}
+                          </p>
+                        </div>
+                        {% endfor %}
+                      </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+          </div> 
         </div>
-
-        <div class="mt-3" data-aos="fade-up" data-aos-delay="100">
-          {% for question in questions %}
-          <h4>{{ question.text }}</h4>
-          <p>
-            Your Answer(s):
-            <!-- For all answers -->
-            {% for choice_id in user_answers|default:question.id %}
-            <!-- Display -->
-            {{ choice_id|choice_text:question.id }}
-            <!-- if not last -->
-            {% if not forloop.last%}, {% endif %}
-            <!-- Endfor -->
-            {% endfor %}
-          </p>
-          <p>
-            Correct Answer(s):
-            <!-- For correct -->
-            {% for correct_choice in correct_answers|default:question.id %}
-            <!-- Show correct -->
-            {{ correct_choice }}
-            <!-- If not last -->
-            {% if not forloop.last %}, {% endif %}
-            <!-- Endfor -->
-            {% endfor %}
-          </p>
-          {% endfor %}
-        </div>
-      </div>
-    </div>
   </section>
 </main>
 <!-- End #main -->
