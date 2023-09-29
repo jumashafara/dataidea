@@ -14,7 +14,14 @@ from collections import defaultdict
 # Create your views here.
 
 def quiz_view(request, quiz_id):
-    quiz = Quiz.objects.get(pk=quiz_id)
+    try:
+        quiz = Quiz.objects.get(pk=quiz_id)
+    except Quiz.DoesNotExist:
+        context = {'message': 'Quiz Not Found', 'state': 'danger'}
+        template_name = 'components/message.html'
+        return render (request=request, 
+                       template_name=template_name, 
+                       context=context)
     questions = quiz.questions.all()
 
     # Calculate correct answers for each question

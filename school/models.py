@@ -75,6 +75,7 @@ class Course(models.Model):
     level = models.CharField(max_length=22, choices=LEVELS, default='reception-1')
     learners = models.IntegerField(default=0)
     videos = models.ManyToManyField(to=Video, default='No Videos')
+    quiz = models.OneToOneField(to=Quiz, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.name
