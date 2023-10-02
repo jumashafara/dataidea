@@ -105,6 +105,7 @@ def blogDetails(request):
     # Fetch Blog Details
     try:
         blog = Blog.objects.get(slug=request.GET.get('slug'))
+        related = Blog.objects.filter(category=blog.category)
     except Blog.DoesNotExist:
         context = {'state': 'danger', 'message': 'Blog not found'}
         template_name = 'components/message.html'
@@ -116,7 +117,8 @@ def blogDetails(request):
     context = {
         'blog': blog, 
         'details': markdown.markdown(blog.content_markdown), 
-        'comments': comments
+        'comments': comments,
+        'related': related[:4]
         }
     return render(request, 'blog/blog_details.html', context=context)
 
@@ -149,17 +151,18 @@ def search(request):
     query = request.POST.get(key='query')
     blogs = Blog.objects.filter(
         Q(title__icontains=query) |
-        Q(content_markdown__icontains=query)
+        Q(content_markdown__icontains=query)|
+        Q(category_id=query)
     )
 
      # Sort
     sorted_blogs = sorted(blogs, key=lambda k: k.popularity, reverse=True)
 
      # pagination
-    paginator = Paginator(sorted_blogs, 4)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+    # paginator = Paginator(sorted_blogs, 4)
+    # page_number = request.GET.get('page')
+    # page_obj = paginator.get_page(page_number)
 
-    context = {'blogs': page_obj}
+    context = {'blogs': sorted_blogs}
     template_name = 'blog/blogs.html'
     return render(request=request, template_name=template_name, context=context)
