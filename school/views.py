@@ -2,14 +2,11 @@ from .models import Quiz
 from .models import Note
 from .models import Video
 from .models import Course
-from .models import Question
 from django.db.models import Q
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
-
-from collections import defaultdict
 
 # Create your views here.
 
@@ -52,7 +49,7 @@ def quiz_view(request, quiz_id):
 
 
 def browse(request):
-    courses = Course.objects.all()
+    courses = Course.objects.all().order_by('-pk')
     course_level_key_map = {'reception-1': 'Introduction'}
     context = {'courses': courses,
                'course_level_key_map': course_level_key_map}
