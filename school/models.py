@@ -81,15 +81,6 @@ class Course(models.Model):
         return self.name
 
 
-class Note(models.Model):
-    user = models.ForeignKey(to=User, on_delete=models.CASCADE)
-    title = models.CharField(max_length=255, default='Note Title')
-    detail = models.TextField(default='Note Detail')
-    date_created = models.DateField(auto_now=True)
-    def __str__(self):
-        return f'{self.user.username}, {self.title}'
-
-
 class Learner(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
     courses = models.ManyToManyField(to=Course)

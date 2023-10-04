@@ -98,21 +98,16 @@
                 </li>
               </ul>
             </li>
-            <li>
-              <a
-                class="nav-link scrollto services"
-                href="{% url 'index:home' %}#services"
-                >Services</a
-              >
-            </li>
             <li class="dropdown">
               <a href="#"
-                ><span>School</span> <i class="bi bi-chevron-down"></i
+                ><span>Services</span> <i class="bi bi-chevron-down"></i
               ></a>
               <ul>
                 <li>
-                  <a class="nav-link scrollto" href="{% url 'school:browse' %}"
-                    >Browse Courses</a
+                  <a
+                    class="nav-link scrollto"
+                    href="{% url 'index:home' %}#services"
+                    >Major Services</a
                   >
                 </li>
                 <li class="dropdown">
@@ -120,11 +115,23 @@
                     ><span>Tools</span> <i class="bi bi-chevron-right"></i
                   ></a>
                   <ul>
-                    <li><a href="{% url 'school:add_note' %}">Notes</a></li>
+                    <li><a href="{% url 'tools:add_note' %}">Notes</a></li>
+                    <li>
+                      <a href="{% url 'tools:upload_transcribe_file' %}"
+                        >Transcriber</a
+                      >
+                    </li>
                     <!-- <li><a href="">Video and Course Finder</a></li> -->
                   </ul>
                 </li>
               </ul>
+            </li>
+            <li>
+              <a
+                class="nav-link scrollto services"
+                href="{% url 'school:browse' %}"
+                >Courses</a
+              >
             </li>
             <li class="dropdown">
               <a href="#"

@@ -9,9 +9,10 @@
         <h2>Notes List</h2>
         <ol>
           <li><a href="/">Home</a></li>
-          <li><a href="{% url 'school:browse' %}">School</a></li>
+          <li><span>Services</span></li>
           <li><span>Tools</span></li>
-          <li><span>Notes List</span></li>
+          <li><span>Notes</span></li>
+          <li><span>List</span></li>
         </ol>
       </div>
     </div>
@@ -44,7 +45,7 @@
         >
           <div class="accordion-body d-flex row">
             <form
-              action="{% url 'school:add_note' %}"
+              action="{% url 'tools:add_note' %}"
               method="post"
               class="d-flex flex-column"
             >
@@ -85,10 +86,10 @@
     {% for note in notes %}
     <div class="d-flex rounded mt-3 p-2 border justify-content-between">
       <span>
-        <a class="" href="{% url 'school:one_note' note.id%}">{{note.title}}</a>
+        <a class="" href="{% url 'tools:one_note' note.id%}">{{note.title}}</a>
       </span>
       <span>
-        <a class="btn btn-danger" href="{% url 'school:delete_note' note.id %}">
+        <a class="btn btn-danger" href="{% url 'tools:delete_note' note.id %}">
           Delete
         </a>
       </span>

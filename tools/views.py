@@ -1,9 +1,9 @@
-import os
-from django.conf import settings
-from django.shortcuts import render, redirect, HttpResponse
-from .models import Transcription
-from .forms import AudioUploadForm, TranscriptionOptionsForm
 import assemblyai as aai
+from .models import Note
+from .models import Transcription
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect, HttpResponse
+from .forms import AudioUploadForm, TranscriptionOptionsForm
 
 aai.settings.api_key = f"3282ce6eca0a47519f6f69dbbaa38da6"
 
@@ -60,3 +60,58 @@ def download_transcription(request, pk, option):
         response['Content-Disposition'] = f'attachment; filename="transcription_summary.txt"'
         response.write(transcription.summary_text)
     return response
+
+
+# Notes Section 
+@login_required(login_url='accounts:signin')
+def add_note(request):
+    if request.method == 'POST':
+        title = request.POST.get(key='title')
+        detail = request.POST.get(key='detail')
+        note = Note(title=title, detail=detail, user=request.user)
+        note.save()
+        return redirect(request.META.get('HTTP_REFERER'))
+    else:
+        user_notes = Note.objects.filter(user = request.user)
+        template_name = 'tools/notes.html'
+        context = {'notes': user_notes}
+        return render(request=request, template_name=template_name, context=context)
+
+@login_required(login_url='accounts:signin')
+def one_note(request, id):
+    try:
+        note = Note.objects.get(id=id)
+        if request.method == 'POST':
+            title = request.POST.get(key='title')
+            detail = request.POST.get(key='detail')
+            note = Note(title=title, detail=detail, user=request.user)
+            note.save()
+            return redirect(request.META.get('HTTP_REFERER'))
+        else:
+            template_name = 'tools/note_detail.html'
+            context = {'note': note}
+            return render(request=request, template_name=template_name, context=context)
+    except Note.DoesNotExist as dne:
+        context = {'state': 'danger', 'message': 'Note does not exist!'}
+        template_name = 'components/message.html'
+        return render(request=request, template_name=template_name, context=context)
+    except Exception as e:
+        context = {'state': 'danger', 'message': 'An error occured while trying to fetch the note'}
+        template_name = 'components/message.html'
+        return render(request=request, template_name=template_name, context=context)
+
+
+@login_required(login_url='accounts:signin')
+def delete_note(request, id):
+    try:
+        note = Note.objects.get(id=id)
+        note.delete()
+        return redirect(to='tools:add_note')
+    except Note.DoesNotExist as dne:
+        context = {'state': 'warning', 'message': 'Note does not exist!'}
+        template_name = 'components/message.html'
+        return render(request=request, template_name=template_name, context=context)
+    except Exception as e:
+        context = {'state': 'warning', 'message': 'An error occured while trying to delete the note'}
+        template_name = 'components/message.html'
+        return render(request=request, template_name=template_name, context=context)

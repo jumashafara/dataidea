@@ -1,5 +1,4 @@
 from .models import Quiz
-from .models import Note
 from .models import Video
 from .models import Course
 from django.db.models import Q
@@ -120,61 +119,6 @@ def comment(request, id):
                     Please try again later.
                     """
         context = {'message': message, 'state': 'warning'}
-        template_name = 'components/message.html'
-        return render(request=request, template_name=template_name, context=context)
-
-
-# Notes Section 
-@login_required(login_url='accounts:signin')
-def add_note(request):
-    if request.method == 'POST':
-        title = request.POST.get(key='title')
-        detail = request.POST.get(key='detail')
-        note = Note(title=title, detail=detail, user=request.user)
-        note.save()
-        return redirect(request.META.get('HTTP_REFERER'))
-    else:
-        user_notes = Note.objects.filter(user = request.user)
-        template_name = 'school/notes.html'
-        context = {'notes': user_notes}
-        return render(request=request, template_name=template_name, context=context)
-
-@login_required(login_url='accounts:signin')
-def one_note(request, id):
-    try:
-        note = Note.objects.get(id=id)
-        if request.method == 'POST':
-            title = request.POST.get(key='title')
-            detail = request.POST.get(key='detail')
-            note = Note(title=title, detail=detail, user=request.user)
-            note.save()
-            return redirect(request.META.get('HTTP_REFERER'))
-        else:
-            template_name = 'school/note_detail.html'
-            context = {'note': note}
-            return render(request=request, template_name=template_name, context=context)
-    except Note.DoesNotExist as dne:
-        context = {'state': 'danger', 'message': 'Note does not exist!'}
-        template_name = 'components/message.html'
-        return render(request=request, template_name=template_name, context=context)
-    except Exception as e:
-        context = {'state': 'danger', 'message': 'An error occured while trying to fetch the note'}
-        template_name = 'components/message.html'
-        return render(request=request, template_name=template_name, context=context)
-
-
-@login_required(login_url='accounts:signin')
-def delete_note(request, id):
-    try:
-        note = Note.objects.get(id=id)
-        note.delete()
-        return redirect(to='school:add_note')
-    except Note.DoesNotExist as dne:
-        context = {'state': 'warning', 'message': 'Note does not exist!'}
-        template_name = 'components/message.html'
-        return render(request=request, template_name=template_name, context=context)
-    except Exception as e:
-        context = {'state': 'warning', 'message': 'An error occured while trying to delete the note'}
         template_name = 'components/message.html'
         return render(request=request, template_name=template_name, context=context)
 
