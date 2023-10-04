@@ -29,6 +29,7 @@ urlpatterns = [
     path(route='school/', view=include('school.urls'), name='school'),
     path(route='profiles/', view=include('profiles.urls'), name='profiles'),
     path(route='accounts/', view=include('accounts.urls'), name='accounts'),
+    path(route='tools/', view=include('tools.urls'), name='tools')
 ]
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
