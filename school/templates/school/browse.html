@@ -97,6 +97,34 @@
             <h5>No courses found</h5>
             {% endif %}
           </div>
+          <!-- Pagination -->
+          <div class="pagination col-md-6 m-auto">
+            <span
+              class="step-links d-flex justify-content-between p-3 border m-2 mt-3 rounded w-100" 
+              style="background: whitesmoke;"
+            >
+              {% if courses.has_previous %}
+              <a href="?page=1">&laquo; First</a>
+              <a href="?page={{ courses.previous_page_number }}">Previous</a>
+              {% endif %}
+
+              <span class="current">
+                Page {{ courses.number }}
+                <!-- Current number -->
+                of
+                <!-- Total number -->
+                {{ courses.paginator.num_pages}}.
+              </span>
+
+              {% if courses.has_next %}
+              <a href="?page={{ courses.next_page_number }}">Next</a>
+              <a href="?page={{ courses.paginator.num_pages }}"
+                >Last &raquo;</a
+              >
+              {% endif %}
+            </span>
+          </div>
+          <!-- End of Pagination -->
         </div>
   </section>
 </main>

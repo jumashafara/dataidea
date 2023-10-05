@@ -92,7 +92,7 @@ def blogs(request):
     sorted_blogs = sorted(blogs, key=lambda k: k.popularity, reverse=True)
 
     # pagination
-    paginator = Paginator(sorted_blogs, 4)
+    paginator = Paginator(sorted_blogs, 8)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 

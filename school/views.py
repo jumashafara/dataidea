@@ -50,7 +50,13 @@ def quiz_view(request, quiz_id):
 def browse(request):
     courses = Course.objects.all().order_by('-pk')
     course_level_key_map = {'reception-1': 'Introduction'}
-    context = {'courses': courses,
+
+    # pagination
+    paginator = Paginator(courses, 8)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {'courses': page_obj,
                'course_level_key_map': course_level_key_map}
     template_name = 'school/browse.html'
     return render(request=request, 
