@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     # added apps
     'blog.apps.BlogConfig',
     'index.apps.IndexConfig',
+    'tools.apps.ToolsConfig',
     'school.apps.SchoolConfig',
     'profiles.apps.ProfilesConfig',
     'accounts.apps.AccountsConfig',

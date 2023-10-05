@@ -1,15 +1,11 @@
 from .models import Quiz
-from .models import Note
 from .models import Video
 from .models import Course
-from .models import Question
 from django.db.models import Q
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
-
-from collections import defaultdict
 
 # Create your views here.
 
@@ -52,7 +48,7 @@ def quiz_view(request, quiz_id):
 
 
 def browse(request):
-    courses = Course.objects.all()
+    courses = Course.objects.all().order_by('-pk')
     course_level_key_map = {'reception-1': 'Introduction'}
     context = {'courses': courses,
                'course_level_key_map': course_level_key_map}
@@ -123,61 +119,6 @@ def comment(request, id):
                     Please try again later.
                     """
         context = {'message': message, 'state': 'warning'}
-        template_name = 'components/message.html'
-        return render(request=request, template_name=template_name, context=context)
-
-
-# Notes Section 
-@login_required(login_url='accounts:signin')
-def add_note(request):
-    if request.method == 'POST':
-        title = request.POST.get(key='title')
-        detail = request.POST.get(key='detail')
-        note = Note(title=title, detail=detail, user=request.user)
-        note.save()
-        return redirect(request.META.get('HTTP_REFERER'))
-    else:
-        user_notes = Note.objects.filter(user = request.user)
-        template_name = 'school/notes.html'
-        context = {'notes': user_notes}
-        return render(request=request, template_name=template_name, context=context)
-
-@login_required(login_url='accounts:signin')
-def one_note(request, id):
-    try:
-        note = Note.objects.get(id=id)
-        if request.method == 'POST':
-            title = request.POST.get(key='title')
-            detail = request.POST.get(key='detail')
-            note = Note(title=title, detail=detail, user=request.user)
-            note.save()
-            return redirect(request.META.get('HTTP_REFERER'))
-        else:
-            template_name = 'school/note_detail.html'
-            context = {'note': note}
-            return render(request=request, template_name=template_name, context=context)
-    except Note.DoesNotExist as dne:
-        context = {'state': 'danger', 'message': 'Note does not exist!'}
-        template_name = 'components/message.html'
-        return render(request=request, template_name=template_name, context=context)
-    except Exception as e:
-        context = {'state': 'danger', 'message': 'An error occured while trying to fetch the note'}
-        template_name = 'components/message.html'
-        return render(request=request, template_name=template_name, context=context)
-
-
-@login_required(login_url='accounts:signin')
-def delete_note(request, id):
-    try:
-        note = Note.objects.get(id=id)
-        note.delete()
-        return redirect(to='school:add_note')
-    except Note.DoesNotExist as dne:
-        context = {'state': 'warning', 'message': 'Note does not exist!'}
-        template_name = 'components/message.html'
-        return render(request=request, template_name=template_name, context=context)
-    except Exception as e:
-        context = {'state': 'warning', 'message': 'An error occured while trying to delete the note'}
         template_name = 'components/message.html'
         return render(request=request, template_name=template_name, context=context)
 

@@ -24,7 +24,8 @@
           <div class="section-title">
             <h2>{{ quiz.name }}</h2>
             <p>
-                {{ quiz.description }}
+                {{ quiz.description }} 
+                <span><a href="{% url 'school:browse' %}">See available courses.</a></span>
             </p>
           </div>
 
