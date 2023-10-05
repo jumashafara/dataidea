@@ -7,6 +7,7 @@ from .forms import AudioUploadForm, TranscriptionOptionsForm
 
 aai.settings.api_key = f"3282ce6eca0a47519f6f69dbbaa38da6"
 
+@login_required(login_url='accounts:signin')
 def upload_file(request):
     if request.method == 'POST':
         audio_form = AudioUploadForm(request.POST, request.FILES)
@@ -29,17 +30,17 @@ def upload_file(request):
                 summary_model=aai.SummarizationModel.informative,
                 summary_type=aai.SummarizationType.bullets
             ))
-            
+
             transcription.summary_text = transcript.summary
             transcription.transcription_text = transcript.text
             # Save transcription
             transcription.save()
 
 
-            return redirect(to='download_transcription', 
-                            pk=transcription.pk, 
+            return redirect(to='download_transcription',
+                            pk=transcription.pk,
                             option='text' if transcript_option == 'text' else 'summary')
-            
+
 
 
 
@@ -62,7 +63,7 @@ def download_transcription(request, pk, option):
     return response
 
 
-# Notes Section 
+# Notes Section
 @login_required(login_url='accounts:signin')
 def add_note(request):
     if request.method == 'POST':

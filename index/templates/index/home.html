@@ -13,8 +13,8 @@
       >
         <h1>Better Digital Experience With Data Idea</h1>
         <h2>
-          We are team of talented researchers and developers providing the best
-          by optimizing the latest tech
+          We are team of talented researchers and developers providing quality software solutions
+          by laveraging the latest tech
         </h2>
         <div>
           <a href="{% url 'accounts:signin' %}" class="btn-get-started scrollto">Get Started</a>
@@ -37,7 +37,7 @@
 <!-- End Hero -->
 
 <main id="main">
-  <!-- ======= About Section ======= -->
+    <!-- ======= About Section ======= -->
   <section id="about" class="about">
     <div class="container">
       <div class="row">
@@ -56,8 +56,8 @@
           <p class="fst-italic">
             At Data Idea, we are committed to helping businesses harness the
             power of data to drive growth and innovation. Our team of skilled
-            professionals specializes in providing comprehensive data-driven
-            solutions that empower organizations to make informed decisions and
+            professionals specializes in providing comprehensive data-driven software
+            solutions using AI tools that empower organizations to make informed decisions or operate faster and
             achieve their goals.
           </p>
           <p class="fst-italic">Key Features of Data Idea</p>
@@ -67,7 +67,7 @@
               unique needs of each client.
             </li>
             <li>
-              <i class="bi bi-check-circle"></i> Laverage advanced ML and AI technologies to develop predictive models, automate processes, and improve decision making.
+              <i class="bi bi-check-circle"></i>Laverage advanced ML and AI technologies to develop predictive models, automate processes, and improve decision making.
             </li>
           </ul>
           <a href="#features" class="read-more"
@@ -340,14 +340,14 @@
               Discover the organizations and collaborators who support our mission and contribute to our success.
             </p>
           </div>
-    
-   
+
+
           <div class="row">
             {% if partners %}
             {% for partner in partners %}
             <div class="col-lg-3 col-md-6 mt-3" data-aos="fade-up" data-aos-delay="100">
               <div class="box">
-                <img src="{{partner.image}}" 
+                <img src="{{partner.image}}"
                 class="img-fluid rounded"
                 alt="" />
                 <h5 class="mt-3">{{ partner.name }}</h5>
@@ -364,7 +364,7 @@
           <!-- Pagination -->
           <div class="pagination col-md-6 m-auto">
             <span
-              class="step-links d-flex justify-content-between p-3 border m-2 mt-3 rounded w-100" 
+              class="step-links d-flex justify-content-between p-3 border m-2 mt-3 rounded w-100"
               style="background: whitesmoke;"
             >
               {% if partners.has_previous %}
@@ -425,7 +425,7 @@
       {% else %}
       <div>No prices found</div>
       {% endif %}
-        
+
       </div>
     </div>
   </section>
